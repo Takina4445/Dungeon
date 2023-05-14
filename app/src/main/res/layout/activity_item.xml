@@ -5,5 +5,67 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".item">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
+        <LinearLayout
+            android:id="@+id/top_layout"
+            android:layout_width="match_parent"
+            android:layout_height="550dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:background="#494747"
+            android:padding="16dp">
+
+            <!-- 內部的 LinearLayout 內容 -->
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/bottom_layout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:background="#31419C"
+            android:padding="16dp">
+
+            <!-- 底部的 LinearLayout 內容 -->
+            <Button
+                android:id="@+id/button1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="48"
+                android:minHeight="60dp"
+                android:text="戰鬥"
+                android:textColor="#F67A70"
+                android:textSize="20sp"/>
+
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="48"
+                android:minHeight="60dp"
+                android:text="背包"
+                android:textColor="#C3D7F1"
+                android:textSize="20sp"
+                />
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="48"
+                android:minHeight="60dp"
+                android:text="食物"
+                android:textColor="#8EF392"
+                android:textSize="20sp"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -18,7 +18,7 @@
             android:layout_height="550dp"
             android:layout_weight="1"
             android:orientation="horizontal"
-            android:background="#FFC107"
+            android:background="#494747"
             android:padding="16dp">
 
             <!-- 內部的 LinearLayout 內容 -->
@@ -31,7 +31,7 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:orientation="horizontal"
-            android:background="#7B7B7B	"
+            android:background="#31419C"
             android:padding="16dp">
 
             <!-- 底部的 LinearLayout 內容 -->
