@@ -63,15 +63,15 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
-                        tools:src="@tools:sample/backgrounds/scenic" />
+                        android:src="@drawable/mouse" />
 
                     <TextView
                         android:id="@+id/textview_EnemyName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:text="N/A"
-                        android:textColor="#FFFFFF"
+                        android:text="陰溝裡的老鼠戰士 LV.1"
+                        android:textColor="#F43D3D"
                         android:textSize="15sp" />
 
                 </LinearLayout>
