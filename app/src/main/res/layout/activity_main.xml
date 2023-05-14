@@ -39,13 +39,14 @@
 
                     <!-- 上上左半邊的佈局 -->
                     <TextView
-                        android:id="@+id/textView"
+                        android:id="@+id/textview_status"
                         android:layout_width="match_parent"
-                        android:layout_height="200dp"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="生命:10\n體力:5"
+                        android:text="生命:null\n體力:null\n攻擊力:null\n防禦力:null\n"
                         android:textColor="#FFFFFF"
-                        android:textSize="20sp"/>
+                        android:textSize="15sp"
+                        android:lineSpacingMultiplier="1.2"/><!--1.2倍行高-->
 
                 </LinearLayout>
 
@@ -55,10 +56,27 @@
                     android:layout_weight="1"
                     android:orientation="vertical">
 
-                    <!-- 上上右半邊的佈局 -->
 
+                    <!-- 上上右半邊的佈局 -->
+                    <ImageView
+                        android:id="@+id/imageview_EnemyPic"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        tools:src="@tools:sample/backgrounds/scenic" />
+
+                    <TextView
+                        android:id="@+id/textview_EnemyName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="N/A"
+                        android:textColor="#FFFFFF"
+                        android:textSize="15sp" />
 
                 </LinearLayout>
+
+
 
             </LinearLayout>
 
