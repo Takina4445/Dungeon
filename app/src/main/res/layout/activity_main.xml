@@ -15,20 +15,20 @@
         <LinearLayout
             android:id="@+id/top_layout"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:layout_weight="1"
-            android:orientation="horizontal"
+            android:layout_height="180dp"
+            android:layout_weight="32"
             android:background="#494747"
+            android:orientation="horizontal"
             android:padding="16dp">
 
             <!-- 上半部的 LinearLayout 內容 -->
             <LinearLayout
                 android:id="@+id/main_top_layout"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="horizontal"
                 android:background="#494747"
+                android:orientation="horizontal"
                 android:padding="16dp">
                 <!--                上半部的上半部-->
                 <LinearLayout
@@ -44,10 +44,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="3"
+                        android:lineSpacingMultiplier="1.2"
                         android:text="生命:null\n體力:null\n攻擊力:null\n防禦力:null\n"
                         android:textColor="#FFFFFF"
-                        android:textSize="15sp"
-                        android:lineSpacingMultiplier="1.2"/><!--1.2倍行高-->
+                        android:textSize="15sp" /><!--1.2倍行高-->
                     <!-- android:layout_weight="3" 占比3/(3+1+1)=1/2 -->
                     <Button
                         android:id="@+id/button_place1"
@@ -57,8 +57,7 @@
                         android:text="巴別塔"
                         android:textColor="#A3F3A7"
                         android:textSize="15sp"
-                        tools:ignore="TouchTargetSizeCheck"
-                        />
+                        tools:ignore="TouchTargetSizeCheck" />
 
                     <Button
                         android:layout_width="match_parent"
@@ -67,8 +66,7 @@
                         android:text="精靈樹"
                         android:textColor="#FAEA64"
                         android:textSize="15sp"
-                        tools:ignore="TouchTargetSizeCheck"
-                        />
+                        tools:ignore="TouchTargetSizeCheck" />
 
                     <Button
                         android:layout_width="match_parent"
@@ -77,8 +75,7 @@
                         android:text="龍之巢穴"
                         android:textColor="#FD77B1"
                         android:textSize="15sp"
-                        tools:ignore="TouchTargetSizeCheck"
-                        />
+                        tools:ignore="TouchTargetSizeCheck" />
 
                     <!-- 底部的 LinearLayout 內容 -->
 
@@ -111,7 +108,6 @@
                 </LinearLayout>
 
 
-
             </LinearLayout>
             <!--上上上結束-->
 
@@ -119,21 +115,72 @@
         <LinearLayout
             android:id="@+id/mid_layout"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_weight="1"
-            android:orientation="horizontal"
+            android:layout_height="250dp"
+            android:layout_weight="40"
+            android:orientation="vertical"
             android:background="#494747"
             android:padding="16dp">
 
             <!-- 中半部的 LinearLayout 內容 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="62dp"
+                android:layout_weight="1"
+                android:background="#494747"
+                android:orientation="horizontal"
+                android:padding="16dp">
+                <!--上中上 戰鬥 休息-->
+                <Button
+                    android:id="@+id/button_battle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="48"
+                    android:minHeight="30dp"
+                    android:text="戰鬥"
+                    android:textColor="#F3A128"
+                    android:textSize="15sp"
+                    tools:ignore="TouchTargetSizeCheck" />
 
 
+                <Button
+                    android:id="@+id/button_rest"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="48"
+                    android:minHeight="30dp"
+                    android:text="休息"
+                    android:textColor="#C3D7F1"
+                    android:textSize="15sp"
+                    tools:ignore="TouchTargetSizeCheck" />
+
+
+            </LinearLayout>
+<!--            上中上結束-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_weight="8"
+                android:orientation="horizontal"
+                android:background="#494747"
+                android:padding="16dp">
+<!--                上中下-->
+                <TextView
+                    android:id="@+id/textview_battleprocess"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:lineSpacingMultiplier="0.8"
+                    android:text="目前無對戰紀錄"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp" />
+            </LinearLayout>
+<!--            上中下結束-->
         </LinearLayout>
         <LinearLayout
             android:id="@+id/bottom_layout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="25"
             android:orientation="horizontal"
             android:background="#31419C"
             android:padding="16dp">
@@ -147,7 +194,8 @@
                 android:minHeight="60dp"
                 android:text="戰鬥"
                 android:textColor="#F67A70"
-                android:textSize="20sp"/>
+                android:textSize="20sp"
+                tools:ignore="TouchTargetSizeCheck"/>
 
 
             <Button
@@ -159,6 +207,7 @@
                 android:text="背包"
                 android:textColor="#C3D7F1"
                 android:textSize="20sp"
+                tools:ignore="TouchTargetSizeCheck"
                 />
 
             <Button
@@ -170,6 +219,7 @@
                 android:text="食物"
                 android:textColor="#8EF392"
                 android:textSize="20sp"
+                tools:ignore="TouchTargetSizeCheck"
                 />
         </LinearLayout>
 
