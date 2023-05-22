@@ -21,6 +21,12 @@
 
             <!-- 內部的 LinearLayout 內容 -->
 
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="wrap_content"
+                android:layout_height="499dp"
+                android:layout_weight="1"
+                tools:srcCompat="@tools:sample/avatars" />
         </LinearLayout>
 
         <LinearLayout

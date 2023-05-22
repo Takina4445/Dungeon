@@ -17,8 +17,8 @@ class food : AppCompatActivity() {
         val button_item:Button=findViewById<Button>(R.id.button2)
         val button_food:Button=findViewById<Button>(R.id.button3)
         button_main.setOnClickListener(ActivityChange_main)
-        button_main.setOnClickListener(ActivityChange_item)
-        button_main.setOnClickListener(ActivityChange_food)
+        button_item.setOnClickListener(ActivityChange_item)
+        button_food.setOnClickListener(ActivityChange_food)
     }
     private val ActivityChange_main= View.OnClickListener{
         //切換至主頁面(戰鬥頁面)
