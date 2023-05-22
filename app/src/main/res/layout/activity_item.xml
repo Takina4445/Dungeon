@@ -19,8 +19,12 @@
             android:background="#494747"
             android:padding="16dp">
 
-            <!-- 內部的 LinearLayout 內容 -->
-
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                tools:srcCompat="@tools:sample/avatars" />
         </LinearLayout>
 
         <LinearLayout
