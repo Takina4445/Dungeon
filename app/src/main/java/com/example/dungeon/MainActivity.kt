@@ -29,13 +29,13 @@ class MainActivity : AppCompatActivity() {
     private val ActivityChange_item= View.OnClickListener{
         //切換至主頁面(戰鬥頁面)
         val intent = Intent()
-        intent.setClass(this, item::class.java)
+        intent.setClass(this, Item::class.java)
         startActivity(intent)
     }
     private val ActivityChange_food= View.OnClickListener{
         //切換至主頁面(戰鬥頁面)
         val intent = Intent()
-        intent.setClass(this, food::class.java)
+        intent.setClass(this, Food::class.java)
         startActivity(intent)
     }
 }
