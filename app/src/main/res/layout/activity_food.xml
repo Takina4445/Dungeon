@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Food">
+    tools:context=".Item">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,177 +12,434 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/top_layout"
             android:layout_width="match_parent"
-            android:layout_height="180dp"
-            android:layout_weight="32"
-            android:background="#494747"
-            android:orientation="horizontal"
-            android:padding="16dp">
-
-            <!-- 上半部的 LinearLayout 內容 -->
+            android:layout_height="0dp"
+            android:layout_weight="220"
+            android:orientation="vertical">
+            <!--        除了下方按鈕之外的主要頁面-->
             <LinearLayout
-                android:id="@+id/main_top_layout"
+                android:id="@+id/top_layout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_height="0dp"
+                android:layout_weight="40"
                 android:background="#494747"
                 android:orientation="horizontal"
-                android:padding="16dp">
-                <!--                上半部的上半部-->
+                android:padding="8dp">
+
+                <!-- 上半部的 LinearLayout 內容 -->
                 <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/main_top_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:background="#494747"
+                    android:orientation="vertical"
+                    android:padding="8dp">
+                    <!--物品欄LinearLayout-->
 
-                    <!-- 上上左半邊的佈局 -->
-
-                    <TextView
-                        android:id="@+id/textview_status"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="3"
-                        android:lineSpacingMultiplier="1.2"
-                        android:text="生命:null\n體力:null\n攻擊力:null\n防禦力:null\n"
-                        android:textColor="#FFFFFF"
-                        android:textSize="15sp" /><!--1.2倍行高-->
-                    <!-- android:layout_weight="3" 占比3/(3+1+1)=1/2 -->
-                    <Button
-                        android:id="@+id/button_place1"
+                        android:layout_marginBottom="8dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+                        <!-- 第一條物品欄 -->
+                        <ImageButton
+                            android:id="@+id/imagebutton_item1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="8dp"
+                            android:layout_weight="1"
+                            android:background="#494747"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/empty"
+                            tools:ignore="SpeakableTextPresentCheck" />
+
+                        <ImageButton
+                            android:id="@+id/imagebutton_item2"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="8dp"
+                            android:layout_weight="1"
+                            android:background="#494747"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/empty"
+                            tools:ignore="SpeakableTextPresentCheck" />
+
+                        <ImageButton
+                            android:id="@+id/imagebutton_item3"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="8dp"
+                            android:layout_weight="1"
+                            android:background="#494747"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/empty"
+                            tools:ignore="SpeakableTextPresentCheck" />
+
+                        <ImageButton
+                            android:id="@+id/imagebutton_item4"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="8dp"
+                            android:layout_weight="1"
+                            android:background="#494747"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/empty"
+                            tools:ignore="SpeakableTextPresentCheck" />
+
+                        <ImageButton
+                            android:id="@+id/imagebutton_item5"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="8dp"
+                            android:layout_weight="1"
+                            android:background="#494747"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/empty"
+                            tools:ignore="SpeakableTextPresentCheck" />
+                        <!--下一行是第1列尾端-->
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+
+                        <!-- 第二條物品欄 -->
+                        <ImageButton
+                            android:id="@+id/imagebutton_item6"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="8dp"
+                            android:layout_weight="1"
+                            android:background="#494747"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/empty"
+                            tools:ignore="SpeakableTextPresentCheck" />
+
+                        <ImageButton
+                            android:id="@+id/imagebutton_item7"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="8dp"
+                            android:layout_weight="1"
+                            android:background="#494747"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/empty"
+                            tools:ignore="SpeakableTextPresentCheck" />
+
+                        <ImageButton
+                            android:id="@+id/imagebutton_item8"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="8dp"
+                            android:layout_weight="1"
+                            android:background="#494747"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/empty"
+                            tools:ignore="SpeakableTextPresentCheck" />
+
+                        <ImageButton
+                            android:id="@+id/imagebutton_item9"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="8dp"
+                            android:layout_weight="1"
+                            android:background="#494747"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/empty"
+                            tools:ignore="SpeakableTextPresentCheck" />
+
+                        <ImageButton
+                            android:id="@+id/imagebutton_item10"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="8dp"
+                            android:layout_weight="1"
+                            android:background="#494747"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/empty"
+                            tools:ignore="SpeakableTextPresentCheck" />
+                        <!--下一行是第2列尾端-->
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+                        <!-- 第3條物品欄 -->
+                        <ImageButton
+                            android:id="@+id/imagebutton_item11"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="8dp"
+                            android:layout_weight="1"
+                            android:background="#494747"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/empty"
+                            tools:ignore="SpeakableTextPresentCheck" />
+
+                        <ImageButton
+                            android:id="@+id/imagebutton_item12"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="8dp"
+                            android:layout_weight="1"
+                            android:background="#494747"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/empty"
+                            tools:ignore="SpeakableTextPresentCheck" />
+
+                        <ImageButton
+                            android:id="@+id/imagebutton_item13"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="8dp"
+                            android:layout_weight="1"
+                            android:background="#494747"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/empty"
+                            tools:ignore="SpeakableTextPresentCheck" />
+
+                        <ImageButton
+                            android:id="@+id/imagebutton_item14"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="8dp"
+                            android:layout_weight="1"
+                            android:background="#494747"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/empty"
+                            tools:ignore="SpeakableTextPresentCheck" />
+
+                        <ImageButton
+                            android:id="@+id/imagebutton_item15"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="8dp"
+                            android:layout_weight="1"
+                            android:background="#494747"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/empty"
+                            tools:ignore="SpeakableTextPresentCheck" />
+                        <!--下一行是第3列尾端-->
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="巴別塔"
-                        android:textColor="#A3F3A7"
-                        android:textSize="15sp"
-                        tools:ignore="TouchTargetSizeCheck" />
+                        android:orientation="horizontal">
+                        <!-- 第4條物品欄 -->
+                        <ImageButton
+                            android:id="@+id/imagebutton_item16"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="8dp"
+                            android:layout_weight="1"
+                            android:background="#494747"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/empty"
+                            tools:ignore="SpeakableTextPresentCheck" />
 
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="精靈樹"
-                        android:textColor="#FAEA64"
-                        android:textSize="15sp"
-                        tools:ignore="TouchTargetSizeCheck" />
+                        <ImageButton
+                            android:id="@+id/imagebutton_item17"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="8dp"
+                            android:layout_weight="1"
+                            android:background="#494747"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/empty"
+                            tools:ignore="SpeakableTextPresentCheck" />
 
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="龍之巢穴"
-                        android:textColor="#FD77B1"
-                        android:textSize="15sp"
-                        tools:ignore="TouchTargetSizeCheck" />
+                        <ImageButton
+                            android:id="@+id/imagebutton_item18"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="8dp"
+                            android:layout_weight="1"
+                            android:background="#494747"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/empty"
+                            tools:ignore="SpeakableTextPresentCheck" />
 
-                    <!-- 底部的 LinearLayout 內容 -->
+                        <ImageButton
+                            android:id="@+id/imagebutton_item19"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="8dp"
+                            android:layout_weight="1"
+                            android:background="#494747"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/empty"
+                            tools:ignore="SpeakableTextPresentCheck" />
+
+                        <ImageButton
+                            android:id="@+id/imagebutton_item20"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="8dp"
+                            android:layout_weight="1"
+                            android:background="#494747"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/empty"
+                            tools:ignore="SpeakableTextPresentCheck" />
+                        <!--下一行是第4列尾端-->
+                    </LinearLayout>
 
                 </LinearLayout>
+                <!--上上上結束-->
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/mid_layout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="40"
+                android:background="#494747"
+                android:orientation="vertical"
+                android:padding="8dp">
 
                 <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-
-                    <!-- 上上右半邊的佈局 -->
-                    <ImageView
-                        android:id="@+id/imageview_EnemyPic"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:src="@drawable/mouse" />
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="30"
+                    android:background="#494747"
+                    android:orientation="vertical"
+                    android:padding="8dp">
+                    <!--                上中下-->
 
                     <TextView
-                        android:id="@+id/textview_EnemyName"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/textview_itemtitle"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:text="陰溝裡的老鼠戰士 LV.1"
-                        android:textColor="#F43D3D"
+                        android:layout_weight="10"
+                        android:lineSpacingMultiplier="0.8"
+                        android:text="果汁"
+                        android:textColor="#E91E63"
+                        android:textSize="20sp"
+                        android:textStyle="bold|italic" />
+
+                    <TextView
+                        android:id="@+id/textview_itemtext"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="20"
+                        android:lineSpacingMultiplier="0.8"
+                        android:text="在地下城中獲得色彩鮮艷的果汁，不知道喝下去有什麼神奇的效果/地下城中獲得的彩色果汁，喝下之後飄飄欲仙(效果:生命值恢復50)"
+                        android:textColor="#FFFFFF"
                         android:textSize="16sp" />
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="60"
+                        android:background="#494747"
+                        android:orientation="horizontal"
+                        android:padding="8dp">
+
+                        <ImageButton
+                            android:id="@+id/imagebutton_food_in1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="40dp"
+                            android:layout_weight="1"
+                            android:background="#494747"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/empty"
+                            tools:ignore="SpeakableTextPresentCheck" />
+
+                        <ImageButton
+                            android:id="@+id/imagebutton_food_in2"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="40dp"
+                            android:layout_weight="1"
+                            android:background="#494747"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/empty"
+                            tools:ignore="SpeakableTextPresentCheck" />
+
+                        <ImageButton
+                            android:id="@+id/imagebutton_food_in3"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="#494747"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/empty"
+                            tools:ignore="SpeakableTextPresentCheck" />
+                    </LinearLayout>
                 </LinearLayout>
-
-
-            </LinearLayout>
-            <!--上上上結束-->
-
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/mid_layout"
-            android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:layout_weight="40"
-            android:orientation="vertical"
-            android:background="#494747"
-            android:padding="16dp">
-
-            <!-- 中半部的 LinearLayout 內容 -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="62dp"
-                android:layout_weight="1"
-                android:background="#494747"
-                android:orientation="horizontal"
-                android:padding="16dp">
-                <!--上中上 戰鬥 休息-->
-                <Button
-                    android:id="@+id/button_battle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="48"
-                    android:minHeight="30dp"
-                    android:text="戰鬥"
-                    android:textColor="#F3A128"
-                    android:textSize="15sp"
-                    tools:ignore="TouchTargetSizeCheck" />
-
-
-                <Button
-                    android:id="@+id/button_rest"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="48"
-                    android:minHeight="30dp"
-                    android:text="休息"
-                    android:textColor="#C3D7F1"
-                    android:textSize="15sp"
-                    tools:ignore="TouchTargetSizeCheck" />
-
-
-            </LinearLayout>
-            <!--            上中上結束-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_weight="8"
-                android:orientation="horizontal"
-                android:background="#494747"
-                android:padding="16dp">
-                <!--                上中下-->
-                <TextView
-                    android:id="@+id/textview_battleprocess"
+                <!-- 中半部的 LinearLayout 內容 -->
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:lineSpacingMultiplier="0.8"
-                    android:text="食物"
-                    android:textColor="#FFFFFF"
-                    android:textSize="16sp" />
+                    android:layout_height="0sp"
+                    android:layout_weight="8"
+                    android:background="#494747"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+                    <!--上中上 戰鬥 休息-->
+                    <Button
+                        android:id="@+id/button_add"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="48"
+                        android:minHeight="20dp"
+                        android:text="添加材料"
+                        android:textColor="#DC8F1D"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        tools:ignore="TouchTargetSizeCheck" />
+
+                    <Button
+                        android:id="@+id/button_foodclear"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="48"
+                        android:minHeight="20dp"
+                        android:text="清除材料"
+                        android:textColor="#DC8F1D"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        tools:ignore="TouchTargetSizeCheck" />
+
+                    <Button
+                        android:id="@+id/button_rest"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="48"
+                        android:minHeight="20dp"
+                        android:text="料理食物"
+                        android:textColor="#23AF9F"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        tools:ignore="TouchTargetSizeCheck" />
+
+
+                </LinearLayout>
+                <!--            上中上結束-->
+
+                <!--            上中下結束-->
             </LinearLayout>
-            <!--            上中下結束-->
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/bottom_layout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="25"
-            android:orientation="horizontal"
             android:background="#31419C"
-            android:padding="16dp">
+            android:orientation="horizontal"
+            android:padding="8dp">
 
             <!-- 底部的 LinearLayout 內容 -->
             <Button
@@ -192,9 +449,9 @@
                 android:layout_weight="48"
                 android:minHeight="60dp"
                 android:text="戰鬥"
-                android:textColor="#F67A70"
+                android:textColor="#FF3727"
                 android:textSize="20sp"
-                tools:ignore="TouchTargetSizeCheck"/>
+                tools:ignore="TouchTargetSizeCheck" />
 
 
             <Button
@@ -204,10 +461,9 @@
                 android:layout_weight="48"
                 android:minHeight="60dp"
                 android:text="背包"
-                android:textColor="#C3D7F1"
+                android:textColor="#177BFB"
                 android:textSize="20sp"
-                tools:ignore="TouchTargetSizeCheck"
-                />
+                tools:ignore="TouchTargetSizeCheck" />
 
             <Button
                 android:id="@+id/button3"
@@ -216,10 +472,9 @@
                 android:layout_weight="48"
                 android:minHeight="60dp"
                 android:text="食物"
-                android:textColor="#8EF392"
+                android:textColor="#12B818"
                 android:textSize="20sp"
-                tools:ignore="TouchTargetSizeCheck"
-                />
+                tools:ignore="TouchTargetSizeCheck" />
         </LinearLayout>
 
     </LinearLayout>

@@ -24,7 +24,7 @@
             android:layout_weight="32"
             android:background="#494747"
             android:orientation="horizontal"
-            android:padding="16dp">
+            android:padding="8dp">
 
             <!-- 上半部的 LinearLayout 內容 -->
             <LinearLayout
@@ -34,7 +34,7 @@
                 android:layout_weight="1"
                 android:background="#494747"
                 android:orientation="horizontal"
-                android:padding="16dp">
+                android:padding="8dp">
                 <!--                上半部的上半部-->
                 <LinearLayout
                     android:layout_width="0dp"
@@ -128,16 +128,16 @@
             android:layout_weight="40"
             android:orientation="vertical"
             android:background="#494747"
-            android:padding="16dp">
+            android:padding="8dp">
 
             <!-- 中半部的 LinearLayout 內容 -->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="62dp"
-                android:layout_weight="1"
+                android:layout_height="0dp"
+                android:layout_weight="10"
                 android:background="#494747"
                 android:orientation="horizontal"
-                android:padding="16dp">
+                android:padding="8dp">
                 <!--上中上 戰鬥 休息-->
                 <Button
                     android:id="@+id/button_battle"
@@ -170,10 +170,10 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
-                android:layout_weight="8"
+                android:layout_weight="40"
                 android:orientation="horizontal"
                 android:background="#494747"
-                android:padding="16dp">
+                android:padding="8dp">
 <!--                上中下-->
                 <TextView
                     android:id="@+id/textview_battleprocess"
@@ -195,7 +195,7 @@
             android:layout_weight="25"
             android:orientation="horizontal"
             android:background="#31419C"
-            android:padding="16dp">
+            android:padding="8dp">
 
             <!-- 底部的 LinearLayout 內容 -->
             <Button

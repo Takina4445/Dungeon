@@ -19,6 +19,7 @@ class Food : AppCompatActivity() {
         button_main.setOnClickListener(ActivityChange_main)
         button_item.setOnClickListener(ActivityChange_item)
         button_food.setOnClickListener(ActivityChange_food)
+
     }
     private val ActivityChange_main= View.OnClickListener{
         //切換至主頁面(戰鬥頁面)
@@ -39,5 +40,8 @@ class Food : AppCompatActivity() {
         startActivity(intent)
     }
 
-
+    override fun onBackPressed() {
+//        封鎖返回鍵
+        moveTaskToBack(false)
+    }
 }

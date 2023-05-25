@@ -21,11 +21,11 @@
             <LinearLayout
                 android:id="@+id/top_layout"
                 android:layout_width="match_parent"
-                android:layout_height="180dp"
-                android:layout_weight="32"
+                android:layout_height="0dp"
+                android:layout_weight="40"
                 android:background="#494747"
                 android:orientation="horizontal"
-                android:padding="16dp">
+                android:padding="8dp">
 
                 <!-- 上半部的 LinearLayout 內容 -->
                 <LinearLayout
@@ -35,65 +35,77 @@
                     android:layout_weight="1"
                     android:background="#494747"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    android:padding="8dp">
                     <!--物品欄LinearLayout-->
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
                         android:layout_weight="1"
                         android:orientation="horizontal">
                         <!-- 第一條物品欄 -->
                         <ImageButton
                             android:id="@+id/imagebutton_item1"
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
-                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
                             android:layout_marginRight="8dp"
-                            android:scaleType="fitCenter"
-                            android:src="@drawable/mouse"
-                            tools:ignore="SpeakableTextPresentCheck"/>
+                            android:layout_weight="1"
+                            android:background="#494747"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/empty"
+                            tools:ignore="SpeakableTextPresentCheck" />
+
                         <ImageButton
                             android:id="@+id/imagebutton_item2"
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
-                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
                             android:layout_marginRight="8dp"
-                            android:scaleType="fitCenter"
-                            android:src="@drawable/mouse"
-                            tools:ignore="SpeakableTextPresentCheck"/>
+                            android:layout_weight="1"
+                            android:background="#494747"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/empty"
+                            tools:ignore="SpeakableTextPresentCheck" />
+
                         <ImageButton
                             android:id="@+id/imagebutton_item3"
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
-                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
                             android:layout_marginRight="8dp"
-                            android:scaleType="fitCenter"
-                            android:src="@drawable/mouse"
-                            tools:ignore="SpeakableTextPresentCheck"/>
+                            android:layout_weight="1"
+                            android:background="#494747"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/empty"
+                            tools:ignore="SpeakableTextPresentCheck" />
+
                         <ImageButton
                             android:id="@+id/imagebutton_item4"
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
-                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
                             android:layout_marginRight="8dp"
-                            android:scaleType="fitCenter"
-                            android:src="@drawable/juice2"
-                            tools:ignore="SpeakableTextPresentCheck"/>
+                            android:layout_weight="1"
+                            android:background="#494747"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/empty"
+                            tools:ignore="SpeakableTextPresentCheck" />
+
                         <ImageButton
                             android:id="@+id/imagebutton_item5"
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
-                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
                             android:layout_marginRight="8dp"
-                            android:scaleType="fitCenter"
-                            android:src="@drawable/juice"
-                            tools:ignore="SpeakableTextPresentCheck"/>
+                            android:layout_weight="1"
+                            android:background="#494747"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/empty"
+                            tools:ignore="SpeakableTextPresentCheck" />
                         <!--下一行是第1列尾端-->
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
                         android:layout_weight="1"
                         android:orientation="horizontal">
 
@@ -101,104 +113,125 @@
                         <!-- 第二條物品欄 -->
                         <ImageButton
                             android:id="@+id/imagebutton_item6"
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
-                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
                             android:layout_marginRight="8dp"
-                            android:scaleType="fitCenter"
-                            android:src="@drawable/mouse"
-                            tools:ignore="SpeakableTextPresentCheck"/>
+                            android:layout_weight="1"
+                            android:background="#494747"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/empty"
+                            tools:ignore="SpeakableTextPresentCheck" />
+
                         <ImageButton
                             android:id="@+id/imagebutton_item7"
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
-                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
                             android:layout_marginRight="8dp"
-                            android:scaleType="fitCenter"
-                            android:src="@drawable/mouse"
-                            tools:ignore="SpeakableTextPresentCheck"/>
+                            android:layout_weight="1"
+                            android:background="#494747"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/empty"
+                            tools:ignore="SpeakableTextPresentCheck" />
+
                         <ImageButton
                             android:id="@+id/imagebutton_item8"
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
-                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
                             android:layout_marginRight="8dp"
-                            android:scaleType="fitCenter"
-                            android:src="@drawable/mouse"
-                            tools:ignore="SpeakableTextPresentCheck"/>
+                            android:layout_weight="1"
+                            android:background="#494747"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/empty"
+                            tools:ignore="SpeakableTextPresentCheck" />
+
                         <ImageButton
                             android:id="@+id/imagebutton_item9"
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
-                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
                             android:layout_marginRight="8dp"
-                            android:scaleType="fitCenter"
-                            android:src="@drawable/juice2"
-                            tools:ignore="SpeakableTextPresentCheck"/>
+                            android:layout_weight="1"
+                            android:background="#494747"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/empty"
+                            tools:ignore="SpeakableTextPresentCheck" />
+
                         <ImageButton
                             android:id="@+id/imagebutton_item10"
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
-                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
                             android:layout_marginRight="8dp"
-                            android:scaleType="fitCenter"
-                            android:src="@drawable/juice"
-                            tools:ignore="SpeakableTextPresentCheck"/>
+                            android:layout_weight="1"
+                            android:background="#494747"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/empty"
+                            tools:ignore="SpeakableTextPresentCheck" />
                         <!--下一行是第2列尾端-->
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
                         android:layout_weight="1"
                         android:orientation="horizontal">
                         <!-- 第3條物品欄 -->
                         <ImageButton
                             android:id="@+id/imagebutton_item11"
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
-                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
                             android:layout_marginRight="8dp"
-                            android:scaleType="fitCenter"
-                            android:src="@drawable/mouse"
-                            tools:ignore="SpeakableTextPresentCheck"/>
+                            android:layout_weight="1"
+                            android:background="#494747"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/empty"
+                            tools:ignore="SpeakableTextPresentCheck" />
+
                         <ImageButton
                             android:id="@+id/imagebutton_item12"
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
-                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
                             android:layout_marginRight="8dp"
-                            android:scaleType="fitCenter"
-                            android:src="@drawable/mushrooms"
-                            tools:ignore="SpeakableTextPresentCheck"/>
+                            android:layout_weight="1"
+                            android:background="#494747"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/empty"
+                            tools:ignore="SpeakableTextPresentCheck" />
+
                         <ImageButton
                             android:id="@+id/imagebutton_item13"
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
-                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
                             android:layout_marginRight="8dp"
-                            android:scaleType="fitCenter"
-                            android:src="@drawable/mouse"
-                            tools:ignore="SpeakableTextPresentCheck"/>
+                            android:layout_weight="1"
+                            android:background="#494747"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/empty"
+                            tools:ignore="SpeakableTextPresentCheck" />
+
                         <ImageButton
                             android:id="@+id/imagebutton_item14"
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
-                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
                             android:layout_marginRight="8dp"
-                            android:scaleType="fitCenter"
-                            android:src="@drawable/juice2"
-                            tools:ignore="SpeakableTextPresentCheck"/>
+                            android:layout_weight="1"
+                            android:background="#494747"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/empty"
+                            tools:ignore="SpeakableTextPresentCheck" />
+
                         <ImageButton
                             android:id="@+id/imagebutton_item15"
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
-                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
                             android:layout_marginRight="8dp"
-                            android:scaleType="fitCenter"
-                            android:src="@drawable/juice"
-                            tools:ignore="SpeakableTextPresentCheck"/>
+                            android:layout_weight="1"
+                            android:background="#494747"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/empty"
+                            tools:ignore="SpeakableTextPresentCheck" />
                         <!--下一行是第3列尾端-->
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -207,49 +240,58 @@
                         <!-- 第4條物品欄 -->
                         <ImageButton
                             android:id="@+id/imagebutton_item16"
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
-                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
                             android:layout_marginRight="8dp"
-                            android:scaleType="fitCenter"
-                            android:src="@drawable/mouse"
-                            tools:ignore="SpeakableTextPresentCheck"/>
+                            android:layout_weight="1"
+                            android:background="#494747"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/empty"
+                            tools:ignore="SpeakableTextPresentCheck" />
+
                         <ImageButton
                             android:id="@+id/imagebutton_item17"
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
-                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
                             android:layout_marginRight="8dp"
-                            android:scaleType="fitCenter"
-                            android:src="@drawable/mouse"
-                            tools:ignore="SpeakableTextPresentCheck"/>
+                            android:layout_weight="1"
+                            android:background="#494747"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/empty"
+                            tools:ignore="SpeakableTextPresentCheck" />
+
                         <ImageButton
                             android:id="@+id/imagebutton_item18"
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
-                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
                             android:layout_marginRight="8dp"
-                            android:scaleType="fitCenter"
-                            android:src="@drawable/tooth"
-                            tools:ignore="SpeakableTextPresentCheck"/>
+                            android:layout_weight="1"
+                            android:background="#494747"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/empty"
+                            tools:ignore="SpeakableTextPresentCheck" />
+
                         <ImageButton
                             android:id="@+id/imagebutton_item19"
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
-                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
                             android:layout_marginRight="8dp"
-                            android:scaleType="fitCenter"
-                            android:src="@drawable/juice2"
-                            tools:ignore="SpeakableTextPresentCheck"/>
+                            android:layout_weight="1"
+                            android:background="#494747"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/empty"
+                            tools:ignore="SpeakableTextPresentCheck" />
+
                         <ImageButton
                             android:id="@+id/imagebutton_item20"
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
-                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
                             android:layout_marginRight="8dp"
-                            android:scaleType="fitCenter"
-                            android:src="@drawable/juice"
-                            tools:ignore="SpeakableTextPresentCheck"/>
+                            android:layout_weight="1"
+                            android:background="#494747"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/empty"
+                            tools:ignore="SpeakableTextPresentCheck" />
                         <!--下一行是第4列尾端-->
                     </LinearLayout>
 
@@ -260,18 +302,18 @@
             <LinearLayout
                 android:id="@+id/mid_layout"
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="0dp"
                 android:layout_weight="40"
                 android:orientation="vertical"
                 android:background="#494747"
-                android:padding="16dp">
+                android:padding="8dp">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="30"
                     android:orientation="vertical"
                     android:background="#494747"
-                    android:padding="16dp">
+                    android:padding="8dp">
                     <!--                上中下-->
                     <TextView
                         android:id="@+id/textview_itemtitle"
@@ -311,7 +353,7 @@
                     android:layout_weight="10"
                     android:background="#494747"
                     android:orientation="horizontal"
-                    android:padding="16dp">
+                    android:padding="8dp">
                     <!--上中上 戰鬥 休息-->
                     <Button
                         android:id="@+id/button_battle"
@@ -352,7 +394,7 @@
             android:layout_weight="25"
             android:orientation="horizontal"
             android:background="#31419C"
-            android:padding="16dp">
+            android:padding="8dp">
 
             <!-- 底部的 LinearLayout 內容 -->
             <Button
