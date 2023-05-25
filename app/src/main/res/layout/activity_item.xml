@@ -12,145 +12,326 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/top_layout"
             android:layout_width="match_parent"
-            android:layout_height="180dp"
-            android:layout_weight="32"
-            android:background="#494747"
-            android:orientation="horizontal"
-            android:padding="16dp">
-
-            <!-- 上半部的 LinearLayout 內容 -->
+            android:layout_height="0dp"
+            android:layout_weight="220"
+            android:orientation="vertical"
+            >
+            <!--        除了下方按鈕之外的主要頁面-->
             <LinearLayout
-                android:id="@+id/main_top_layout"
+                android:id="@+id/top_layout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_height="180dp"
+                android:layout_weight="32"
                 android:background="#494747"
                 android:orientation="horizontal"
                 android:padding="16dp">
-                <!--                上半部的上半部-->
 
-
+                <!-- 上半部的 LinearLayout 內容 -->
                 <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/main_top_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:orientation="horizontal">
+                    android:background="#494747"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+                    <!--物品欄LinearLayout-->
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+                        <!-- 第一條物品欄 -->
+                        <ImageButton
+                            android:id="@+id/imagebutton_item1"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_weight="1"
+                            android:layout_marginRight="8dp"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/mouse"
+                            tools:ignore="SpeakableTextPresentCheck"/>
+                        <ImageButton
+                            android:id="@+id/imagebutton_item2"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_weight="1"
+                            android:layout_marginRight="8dp"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/mouse"
+                            tools:ignore="SpeakableTextPresentCheck"/>
+                        <ImageButton
+                            android:id="@+id/imagebutton_item3"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_weight="1"
+                            android:layout_marginRight="8dp"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/mouse"
+                            tools:ignore="SpeakableTextPresentCheck"/>
+                        <ImageButton
+                            android:id="@+id/imagebutton_item4"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_weight="1"
+                            android:layout_marginRight="8dp"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/juice2"
+                            tools:ignore="SpeakableTextPresentCheck"/>
+                        <ImageButton
+                            android:id="@+id/imagebutton_item5"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_weight="1"
+                            android:layout_marginRight="8dp"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/juice"
+                            tools:ignore="SpeakableTextPresentCheck"/>
+                        <!--下一行是第1列尾端-->
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
 
 
-                    <!-- 上上右半邊的佈局 -->
-                    <ImageButton
-                        android:id="@+id/imagebutton_item1"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
+                        <!-- 第二條物品欄 -->
+                        <ImageButton
+                            android:id="@+id/imagebutton_item6"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_weight="1"
+                            android:layout_marginRight="8dp"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/mouse"
+                            tools:ignore="SpeakableTextPresentCheck"/>
+                        <ImageButton
+                            android:id="@+id/imagebutton_item7"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_weight="1"
+                            android:layout_marginRight="8dp"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/mouse"
+                            tools:ignore="SpeakableTextPresentCheck"/>
+                        <ImageButton
+                            android:id="@+id/imagebutton_item8"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_weight="1"
+                            android:layout_marginRight="8dp"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/mouse"
+                            tools:ignore="SpeakableTextPresentCheck"/>
+                        <ImageButton
+                            android:id="@+id/imagebutton_item9"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_weight="1"
+                            android:layout_marginRight="8dp"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/juice2"
+                            tools:ignore="SpeakableTextPresentCheck"/>
+                        <ImageButton
+                            android:id="@+id/imagebutton_item10"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_weight="1"
+                            android:layout_marginRight="8dp"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/juice"
+                            tools:ignore="SpeakableTextPresentCheck"/>
+                        <!--下一行是第2列尾端-->
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:layout_marginRight="8dp"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/mouse" />
-                    <ImageButton
-                        android:id="@+id/imagebutton_item2"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
+                        android:orientation="horizontal">
+                        <!-- 第3條物品欄 -->
+                        <ImageButton
+                            android:id="@+id/imagebutton_item11"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_weight="1"
+                            android:layout_marginRight="8dp"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/mouse"
+                            tools:ignore="SpeakableTextPresentCheck"/>
+                        <ImageButton
+                            android:id="@+id/imagebutton_item12"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_weight="1"
+                            android:layout_marginRight="8dp"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/mushrooms"
+                            tools:ignore="SpeakableTextPresentCheck"/>
+                        <ImageButton
+                            android:id="@+id/imagebutton_item13"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_weight="1"
+                            android:layout_marginRight="8dp"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/mouse"
+                            tools:ignore="SpeakableTextPresentCheck"/>
+                        <ImageButton
+                            android:id="@+id/imagebutton_item14"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_weight="1"
+                            android:layout_marginRight="8dp"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/juice2"
+                            tools:ignore="SpeakableTextPresentCheck"/>
+                        <ImageButton
+                            android:id="@+id/imagebutton_item15"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_weight="1"
+                            android:layout_marginRight="8dp"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/juice"
+                            tools:ignore="SpeakableTextPresentCheck"/>
+                        <!--下一行是第3列尾端-->
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:layout_marginRight="8dp"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/mouse" />
-                    <ImageButton
-                        android:id="@+id/imagebutton_item3"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:layout_weight="1"
-                        android:layout_marginRight="8dp"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/mouse" />
-                    <ImageButton
-                        android:id="@+id/imagebutton_item4"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:layout_weight="1"
-                        android:layout_marginRight="8dp"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/mouse" />
-                    <ImageButton
-                        android:id="@+id/imagebutton_item5"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:layout_weight="1"
-                        android:layout_marginRight="8dp"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/juice" />
+                        android:orientation="horizontal">
+                        <!-- 第4條物品欄 -->
+                        <ImageButton
+                            android:id="@+id/imagebutton_item16"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_weight="1"
+                            android:layout_marginRight="8dp"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/mouse"
+                            tools:ignore="SpeakableTextPresentCheck"/>
+                        <ImageButton
+                            android:id="@+id/imagebutton_item17"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_weight="1"
+                            android:layout_marginRight="8dp"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/mouse"
+                            tools:ignore="SpeakableTextPresentCheck"/>
+                        <ImageButton
+                            android:id="@+id/imagebutton_item18"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_weight="1"
+                            android:layout_marginRight="8dp"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/tooth"
+                            tools:ignore="SpeakableTextPresentCheck"/>
+                        <ImageButton
+                            android:id="@+id/imagebutton_item19"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_weight="1"
+                            android:layout_marginRight="8dp"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/juice2"
+                            tools:ignore="SpeakableTextPresentCheck"/>
+                        <ImageButton
+                            android:id="@+id/imagebutton_item20"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_weight="1"
+                            android:layout_marginRight="8dp"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/juice"
+                            tools:ignore="SpeakableTextPresentCheck"/>
+                        <!--下一行是第4列尾端-->
+                    </LinearLayout>
 
                 </LinearLayout>
-
+                <!--上上上結束-->
 
             </LinearLayout>
-            <!--上上上結束-->
-
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/mid_layout"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:layout_weight="40"
-            android:orientation="vertical"
-            android:background="#494747"
-            android:padding="16dp">
             <LinearLayout
+                android:id="@+id/mid_layout"
                 android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:layout_weight="8"
-                android:orientation="horizontal"
+                android:layout_height="70dp"
+                android:layout_weight="40"
+                android:orientation="vertical"
                 android:background="#494747"
                 android:padding="16dp">
-                <!--                上中下-->
-                <TextView
-                    android:id="@+id/textview_battleprocess"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:lineSpacingMultiplier="0.8"
-                    android:text="背包"
-                    android:textColor="#FFFFFF"
-                    android:textSize="16sp" />
+                    android:layout_height="0dp"
+                    android:layout_weight="30"
+                    android:orientation="vertical"
+                    android:background="#494747"
+                    android:padding="16dp">
+                    <!--                上中下-->
+                    <TextView
+                        android:id="@+id/textview_itemtitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="10"
+                        android:lineSpacingMultiplier="0.8"
+                        android:text="果汁"
+                        android:textColor="#E91E63"
+                        android:textSize="20sp"
+                        android:textStyle="bold|italic"
+                        />
+                    <TextView
+                        android:id="@+id/textview_itemtext"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="30"
+                        android:lineSpacingMultiplier="0.8"
+                        android:text="在地下城中獲得色彩鮮艷的果汁，不知道喝下去有什麼神奇的效果/地下城中獲得的彩色果汁，喝下之後飄飄欲仙(效果:生命值恢復50)"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp" />
+                </LinearLayout>
+                <!-- 中半部的 LinearLayout 內容 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0sp"
+                    android:layout_weight="10"
+                    android:background="#494747"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+                    <!--上中上 戰鬥 休息-->
+                    <Button
+                        android:id="@+id/button_battle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="48"
+                        android:minHeight="20dp"
+                        android:text="使用"
+                        android:textColor="#F3A128"
+                        android:textSize="12sp"
+                        tools:ignore="TouchTargetSizeCheck" />
+
+
+                    <Button
+                        android:id="@+id/button_rest"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="48"
+                        android:minHeight="20dp"
+                        android:text="丟棄"
+                        android:textColor="#C3D7F1"
+                        android:textSize="12sp"
+                        tools:ignore="TouchTargetSizeCheck" />
+
+
+                </LinearLayout>
+                <!--            上中上結束-->
+
+                <!--            上中下結束-->
             </LinearLayout>
-            <!-- 中半部的 LinearLayout 內容 -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:background="#494747"
-                android:orientation="horizontal"
-                android:padding="16dp">
-                <!--上中上 戰鬥 休息-->
-                <Button
-                    android:id="@+id/button_battle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="48"
-                    android:minHeight="20dp"
-                    android:text="使用"
-                    android:textColor="#F3A128"
-                    android:textSize="12sp"
-                    tools:ignore="TouchTargetSizeCheck" />
-
-
-                <Button
-                    android:id="@+id/button_rest"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="48"
-                    android:minHeight="20dp"
-                    android:text="丟棄"
-                    android:textColor="#C3D7F1"
-                    android:textSize="12sp"
-                    tools:ignore="TouchTargetSizeCheck" />
-
-
-            </LinearLayout>
-            <!--            上中上結束-->
-
-            <!--            上中下結束-->
         </LinearLayout>
         <LinearLayout
             android:id="@+id/bottom_layout"
@@ -162,6 +343,8 @@
             android:padding="16dp">
 
             <!-- 底部的 LinearLayout 內容 -->
+
+
             <Button
                 android:id="@+id/button1"
                 android:layout_width="0dp"
@@ -171,8 +354,8 @@
                 android:text="戰鬥"
                 android:textColor="#F67A70"
                 android:textSize="20sp"
-                tools:ignore="TouchTargetSizeCheck"/>
-
+                android:textStyle="bold"
+                tools:ignore="TouchTargetSizeCheck" />
 
             <Button
                 android:id="@+id/button2"
