@@ -11,7 +11,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="220"
+        android:orientation="vertical"
+        >
         <LinearLayout
             android:id="@+id/top_layout"
             android:layout_width="match_parent"
@@ -35,6 +40,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:layout_marginRight="8dp"
                     android:orientation="vertical">
 
                     <!-- 上上左半邊的佈局 -->
@@ -55,8 +61,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="巴別塔"
-                        android:textColor="#A3F3A7"
+                        android:textColor="#26F831"
                         android:textSize="15sp"
+                        android:textStyle="bold"
                         tools:ignore="TouchTargetSizeCheck" />
 
                     <Button
@@ -64,8 +71,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="精靈樹"
-                        android:textColor="#FAEA64"
+                        android:textColor="#FAE21C"
                         android:textSize="15sp"
+                        android:textStyle="bold"
                         tools:ignore="TouchTargetSizeCheck" />
 
                     <Button
@@ -73,8 +81,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="龍之巢穴"
-                        android:textColor="#FD77B1"
+                        android:textColor="#FF1D7F"
                         android:textSize="15sp"
+                        android:textStyle="bold"
                         tools:ignore="TouchTargetSizeCheck" />
 
                     <!-- 底部的 LinearLayout 內容 -->
@@ -115,7 +124,7 @@
         <LinearLayout
             android:id="@+id/mid_layout"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="0dp"
             android:layout_weight="40"
             android:orientation="vertical"
             android:background="#494747"
@@ -137,8 +146,9 @@
                     android:layout_weight="48"
                     android:minHeight="30dp"
                     android:text="戰鬥"
-                    android:textColor="#F3A128"
+                    android:textColor="#AE6700"
                     android:textSize="15sp"
+                    android:textStyle="bold"
                     tools:ignore="TouchTargetSizeCheck" />
 
 
@@ -149,8 +159,9 @@
                     android:layout_weight="48"
                     android:minHeight="30dp"
                     android:text="休息"
-                    android:textColor="#C3D7F1"
+                    android:textColor="#21508C"
                     android:textSize="15sp"
+                    android:textStyle="bold"
                     tools:ignore="TouchTargetSizeCheck" />
 
 
@@ -176,6 +187,7 @@
             </LinearLayout>
 <!--            上中下結束-->
         </LinearLayout>
+    </LinearLayout>
         <LinearLayout
             android:id="@+id/bottom_layout"
             android:layout_width="match_parent"
@@ -193,7 +205,7 @@
                 android:layout_weight="48"
                 android:minHeight="60dp"
                 android:text="戰鬥"
-                android:textColor="#F67A70"
+                android:textColor="#FF3727"
                 android:textSize="20sp"
                 tools:ignore="TouchTargetSizeCheck"/>
 
@@ -205,7 +217,7 @@
                 android:layout_weight="48"
                 android:minHeight="60dp"
                 android:text="背包"
-                android:textColor="#C3D7F1"
+                android:textColor="#177BFB"
                 android:textSize="20sp"
                 tools:ignore="TouchTargetSizeCheck"
                 />
@@ -217,7 +229,7 @@
                 android:layout_weight="48"
                 android:minHeight="60dp"
                 android:text="食物"
-                android:textColor="#8EF392"
+                android:textColor="#12B818"
                 android:textSize="20sp"
                 tools:ignore="TouchTargetSizeCheck"
                 />
