@@ -2,6 +2,7 @@ package com.example.dungeon
 
 import android.content.ContentValues
 import android.content.Context
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
@@ -34,6 +35,17 @@ class MyDBHelper(context: Context?, name: String?, factory: SQLiteDatabase.Curso
                 "money INT)"
 
         db.execSQL(createTableCommand)
+        //get(0):id
+        //get(1):"name"
+        //get(2):"exp"
+        //get(3):"hp"
+        //get(4):"stamina"
+        //get(5):"atk"
+        //get(6):"def"
+        //get(7):"money"
+
+
+
     }
 
     private fun insertPlayerData(db: SQLiteDatabase) {
@@ -54,5 +66,9 @@ class MyDBHelper(context: Context?, name: String?, factory: SQLiteDatabase.Curso
             newRow.put("money", 0)
             db.insert(DB_TABLE, null, newRow)
         }
+    }
+    fun getPlayerData(): Cursor {
+        val db = readableDatabase
+        return db.query(DB_TABLE, null, null, null, null, null, null)
     }
 }
