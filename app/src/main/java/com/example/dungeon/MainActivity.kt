@@ -35,6 +35,7 @@ class MainActivity : AppCompatActivity() {
 
 // 建立自訂的 FriendDbHelper 物件
         val friDbHp = MyDBHelper(applicationContext, DB_FILE, null, 1)
+        /*
 // 設定建立 table 的指令
         friDbHp.sCreateTableCommand = "CREATE TABLE " + DB_TABLE + "(" +
                 "id INTEGER PRIMARY KEY," +
@@ -46,7 +47,9 @@ class MainActivity : AppCompatActivity() {
                 "def INT," +
                 "money INT)"
 // 取得上面指定的檔名資料庫，如果該檔名不存在就會自動建立一個資料庫檔案
+*/
         MyDB = friDbHp.writableDatabase
+        /*
         val c = MyDB.query(
             true, DB_TABLE, arrayOf("name", "exp", "hp", "stamina","atk","def","money"),
             null, null, null, null, null, null
@@ -68,9 +71,13 @@ class MainActivity : AppCompatActivity() {
             c.moveToFirst();
             textview_player_status.text="生命:"+c.getInt(2)+"\n體力:"+c.getInt(3)+"\n攻擊力:"+c.getInt(4)+"\n防禦力:"+c.getInt(5)+"\n"
         }
-
-
-
+*/
+        val c = MyDB.query(
+            true, DB_TABLE, arrayOf("name", "exp", "hp", "stamina","atk","def","money"),
+            null, null, null, null, null, null
+        )
+        c.moveToFirst();
+        textview_player_status.text="生命:"+c.getInt(2)+"\n體力:"+c.getInt(3)+"\n攻擊力:"+c.getInt(4)+"\n防禦力:"+c.getInt(5)+"\n"
 
 
 
