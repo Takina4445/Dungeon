@@ -48,7 +48,7 @@ class MyDBHelper(context: Context?, name: String?, factory: SQLiteDatabase.Curso
             newRow.put("name", "無名的旅人")
             newRow.put("exp", 0)
             newRow.put("hp", 10)
-            newRow.put("stamina", 11)
+            newRow.put("stamina", 10)
             newRow.put("atk", 1)
             newRow.put("def", 0)
             newRow.put("money", 0)
