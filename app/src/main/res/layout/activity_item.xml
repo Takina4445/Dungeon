@@ -363,7 +363,7 @@
                         android:minHeight="20dp"
                         android:text="使用"
                         android:textColor="#DC8F1D"
-                        android:textSize="14sp"
+                        android:textSize="18sp"
                         android:textStyle="bold"
                         tools:ignore="TouchTargetSizeCheck" />
 
@@ -376,7 +376,7 @@
                         android:minHeight="20dp"
                         android:text="丟棄"
                         android:textColor="#4E4E4E"
-                        android:textSize="14sp"
+                        android:textSize="18sp"
                         android:textStyle="bold"
                         tools:ignore="TouchTargetSizeCheck" />
 

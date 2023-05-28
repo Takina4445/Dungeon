@@ -62,7 +62,7 @@
                         android:layout_weight="1"
                         android:text="巴別塔"
                         android:textColor="#26F831"
-                        android:textSize="15sp"
+                        android:textSize="18sp"
                         android:textStyle="bold"
                         tools:ignore="TouchTargetSizeCheck" />
 
@@ -72,7 +72,7 @@
                         android:layout_weight="1"
                         android:text="精靈樹"
                         android:textColor="#FAE21C"
-                        android:textSize="15sp"
+                        android:textSize="18sp"
                         android:textStyle="bold"
                         tools:ignore="TouchTargetSizeCheck" />
 
@@ -82,7 +82,7 @@
                         android:layout_weight="1"
                         android:text="龍之巢穴"
                         android:textColor="#FF1D7F"
-                        android:textSize="15sp"
+                        android:textSize="18sp"
                         android:textStyle="bold"
                         tools:ignore="TouchTargetSizeCheck" />
 
@@ -146,8 +146,8 @@
                     android:layout_weight="48"
                     android:minHeight="30dp"
                     android:text="戰鬥"
-                    android:textColor="#AE6700"
-                    android:textSize="15sp"
+                    android:textColor="#BA8539"
+                    android:textSize="18sp"
                     android:textStyle="bold"
                     tools:ignore="TouchTargetSizeCheck" />
 
@@ -160,7 +160,7 @@
                     android:minHeight="30dp"
                     android:text="休息"
                     android:textColor="#21508C"
-                    android:textSize="15sp"
+                    android:textSize="18sp"
                     android:textStyle="bold"
                     tools:ignore="TouchTargetSizeCheck" />
 

@@ -395,8 +395,8 @@
                         android:layout_weight="48"
                         android:minHeight="20dp"
                         android:text="添加材料"
-                        android:textColor="#DC8F1D"
-                        android:textSize="14sp"
+                        android:textColor="#1DDCC6"
+                        android:textSize="16sp"
                         android:textStyle="bold"
                         tools:ignore="TouchTargetSizeCheck" />
 
@@ -407,8 +407,8 @@
                         android:layout_weight="48"
                         android:minHeight="20dp"
                         android:text="清除材料"
-                        android:textColor="#DC8F1D"
-                        android:textSize="14sp"
+                        android:textColor="#1DCCDC"
+                        android:textSize="16sp"
                         android:textStyle="bold"
                         tools:ignore="TouchTargetSizeCheck" />
 
@@ -419,8 +419,8 @@
                         android:layout_weight="48"
                         android:minHeight="20dp"
                         android:text="料理食物"
-                        android:textColor="#23AF9F"
-                        android:textSize="14sp"
+                        android:textColor="#35CD2F"
+                        android:textSize="16sp"
                         android:textStyle="bold"
                         tools:ignore="TouchTargetSizeCheck" />
 
