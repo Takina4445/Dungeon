@@ -65,7 +65,6 @@ class MainActivity : AppCompatActivity() {
                 +"<font color=${Color.GREEN}>攻擊力:</font>"+"<font color=${Color.WHITE}>"+c.getInt(5)+"<br></font>"
                 +"<font color=${Color.GREEN}>防禦力:</font>"+"<font color=${Color.WHITE}>"+c.getInt(6)+"<br></font>"
         )
-//        textview_player_status.text="生命:"+c.getInt(3)+"\n體力:"+c.getInt(4)+"\n攻擊力:"+c.getInt(5)+"\n防禦力:"+c.getInt(6)+"\n"
 
     }
 //    private fun player_query(): Cursor? {
