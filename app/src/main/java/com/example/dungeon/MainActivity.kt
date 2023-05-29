@@ -6,8 +6,10 @@ import android.content.Intent
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Html
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
@@ -57,20 +59,26 @@ class MainActivity : AppCompatActivity() {
         val c = friDbHp.getPlayerData()
         c.moveToFirst();
         val textview_player_status:TextView=findViewById<TextView>(R.id.textview_status)
-        textview_player_status.text="生命:"+c.getInt(3)+"\n體力:"+c.getInt(4)+"\n攻擊力:"+c.getInt(5)+"\n防禦力:"+c.getInt(6)+"\n"
-
-    }
-    private fun player_query(): Cursor? {
-        val MyDB: SQLiteDatabase
-// 建立自訂的 FriendDbHelper 物件
-        val friDbHp = MyDBHelper(applicationContext, DB_FILE, null, 1)
-
-        MyDB = friDbHp.writableDatabase
-        return MyDB.query(
-            true, DB_TABLE, arrayOf("id","name","exp","hp","syamina","atk","def","money"),
-            null, null, null, null, null, null
+        textview_player_status.text=Html.fromHtml(
+            "<font color=${Color.GREEN}>生命:</font>"+"<font color=${Color.WHITE}>"+c.getInt(3)+"</font>"
+                +"<font color=${Color.GREEN}>體力:</font>"+"<font color=${Color.WHITE}>"+c.getInt(4)+"</font>"
+                +"<font color=${Color.GREEN}>攻擊力:</font>"+"<font color=${Color.WHITE}>"+c.getInt(5)+"</font>"
+                +"<font color=${Color.GREEN}>防禦力:</font>"+"<font color=${Color.WHITE}>"+c.getInt(6)+"</font>"
         )
+//        textview_player_status.text="生命:"+c.getInt(3)+"\n體力:"+c.getInt(4)+"\n攻擊力:"+c.getInt(5)+"\n防禦力:"+c.getInt(6)+"\n"
+
     }
+//    private fun player_query(): Cursor? {
+//        val MyDB: SQLiteDatabase
+//// 建立自訂的 FriendDbHelper 物件
+//        val friDbHp = MyDBHelper(applicationContext, DB_FILE, null, 1)
+//
+//        MyDB = friDbHp.writableDatabase
+//        return MyDB.query(
+//            true, DB_TABLE, arrayOf("id","name","exp","hp","syamina","atk","def","money"),
+//            null, null, null, null, null, null
+//        )
+//    }
     private val ActivityChange_main = View.OnClickListener {
 
         val intent = Intent()
