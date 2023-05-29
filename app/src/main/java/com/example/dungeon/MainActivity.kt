@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity() {
                 +"<font color=${Color.GREEN}>體力:</font>"+"<font color=${Color.WHITE}>"+c.getInt(4)+"<br></font>"
                 +"<font color=${Color.GREEN}>攻擊力:</font>"+"<font color=${Color.WHITE}>"+c.getInt(5)+"<br></font>"
                 +"<font color=${Color.GREEN}>防禦力:</font>"+"<font color=${Color.WHITE}>"+c.getInt(6)+"<br></font>"
-        )
+        ,Html.FROM_HTML_MODE_LEGACY)
 
     }
 //    private fun player_query(): Cursor? {
