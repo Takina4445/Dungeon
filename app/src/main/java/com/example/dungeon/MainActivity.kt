@@ -60,10 +60,10 @@ class MainActivity : AppCompatActivity() {
         c.moveToFirst();
         val textview_player_status:TextView=findViewById<TextView>(R.id.textview_status)
         textview_player_status.text=Html.fromHtml(
-            "<font color=${Color.GREEN}>生命:</font>"+"<font color=${Color.WHITE}>"+c.getInt(3)+"</font>"
-                +"<font color=${Color.GREEN}>體力:</font>"+"<font color=${Color.WHITE}>"+c.getInt(4)+"</font>"
-                +"<font color=${Color.GREEN}>攻擊力:</font>"+"<font color=${Color.WHITE}>"+c.getInt(5)+"</font>"
-                +"<font color=${Color.GREEN}>防禦力:</font>"+"<font color=${Color.WHITE}>"+c.getInt(6)+"</font>"
+            "<font color=${Color.GREEN}>生命:</font>"+"<font color=${Color.WHITE}>"+c.getInt(3)+"<br></font>"
+                +"<font color=${Color.GREEN}>體力:</font>"+"<font color=${Color.WHITE}>"+c.getInt(4)+"<br></font>"
+                +"<font color=${Color.GREEN}>攻擊力:</font>"+"<font color=${Color.WHITE}>"+c.getInt(5)+"<br></font>"
+                +"<font color=${Color.GREEN}>防禦力:</font>"+"<font color=${Color.WHITE}>"+c.getInt(6)+"<br></font>"
         )
 //        textview_player_status.text="生命:"+c.getInt(3)+"\n體力:"+c.getInt(4)+"\n攻擊力:"+c.getInt(5)+"\n防禦力:"+c.getInt(6)+"\n"
 
