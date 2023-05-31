@@ -13,6 +13,7 @@ import android.text.Html
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import com.example.dungeon.MyDBHelper.Companion.DB_TABLE_MONSTER
 import org.w3c.dom.Text
 import java.util.Arrays
 
@@ -24,6 +25,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var button_battle:Button
     val DB_FILE = "doungeon.db"
     val DB_TABLE = "player"
+    val DB_TABLE_MONSTER = "monster"
+    val DB_TABLE_SKILLS="skills"
+    val DB_TABLE_USE_SKILL="useskill"
+    val DB_TABLE_ITEM="item"
 
 
 
@@ -43,14 +48,12 @@ class MainActivity : AppCompatActivity() {
         player_status_change()//刷新玩家資料
 
 
-
-
-
     }
 
     ////////////////////
     ///////////////////
     private fun player_status_change(){
+        
         val MyDB: SQLiteDatabase
 // 建立自訂的 FriendDbHelper 物件
         val friDbHp = MyDBHelper(applicationContext, DB_FILE, null, 1)
@@ -60,10 +63,10 @@ class MainActivity : AppCompatActivity() {
         c.moveToFirst();
         val textview_player_status:TextView=findViewById<TextView>(R.id.textview_status)
         textview_player_status.text=Html.fromHtml(
-            "<font color=${Color.GREEN}>生命:</font>"+"<font color=${Color.WHITE}>"+c.getInt(3)+"<br></font>"
-                +"<font color=${Color.GREEN}>體力:</font>"+"<font color=${Color.WHITE}>"+c.getInt(4)+"<br></font>"
-                +"<font color=${Color.GREEN}>攻擊力:</font>"+"<font color=${Color.WHITE}>"+c.getInt(5)+"<br></font>"
-                +"<font color=${Color.GREEN}>防禦力:</font>"+"<font color=${Color.WHITE}>"+c.getInt(6)+"<br></font>"
+            "<font color=${Color.GREEN}>生命:</font>"+"<font color=${Color.WHITE}>"+c.getInt(4)+"/"+c.getInt(5)+"<br></font>"
+                +"<font color=${Color.GREEN}>體力:</font>"+"<font color=${Color.WHITE}>"+c.getInt(6)+"/"+c.getInt(7)+"<br></font>"
+                +"<font color=${Color.GREEN}>攻擊力:</font>"+"<font color=${Color.WHITE}>"+c.getInt(8)+"<br></font>"
+                +"<font color=${Color.GREEN}>防禦力:</font>"+"<font color=${Color.WHITE}>"+c.getInt(9)+"<br></font>"
         ,Html.FROM_HTML_MODE_LEGACY)
 
     }
@@ -105,17 +108,22 @@ class MainActivity : AppCompatActivity() {
         val c = friDbHp.getPlayerData()
         c.moveToFirst()
         val newRow = ContentValues()
-        newRow.put("name", "無名的旅人")
-        newRow.put("exp", 0)
-        newRow.put("hp", c.getInt(3)+1)
-        newRow.put("stamina", 11)
-        newRow.put("atk", 1)
-        newRow.put("def", 0)
-        newRow.put("money", 0)
+        val monsterName = "野豬"
+        val columnName = "exp"
+        val selection = "name = ?"
+        val selectionArgs = arrayOf(monsterName)
+        val cursor = MyDB.query(DB_TABLE_MONSTER, arrayOf(columnName),selection, selectionArgs, null, null, null)
+        var expValue: Int?=null
+        if (cursor.moveToFirst()) {
+            val columnIndex = cursor.getColumnIndex(columnName)
+            expValue = cursor.getInt(columnIndex)
+        }
+        newRow.put("exp", c.getInt(2)+expValue!!)
 // 將ContentValues中的資料，放至資料表中
         MyDB.update(DB_TABLE, newRow,
             "id='1'", null)
         player_status_change()
+        cursor.close()
     }
 
     /////////

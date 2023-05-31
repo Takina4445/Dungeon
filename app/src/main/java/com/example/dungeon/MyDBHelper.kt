@@ -5,13 +5,16 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import java.sql.Types.NULL
 
 class MyDBHelper(context: Context?, name: String?, factory: SQLiteDatabase.CursorFactory?, version: Int) :
     SQLiteOpenHelper(context, name, factory, version) {
 
     companion object {
-        const val DB_TABLE = "player"
+        val DB_TABLE = "player"
         const val DB_TABLE_MONSTER = "monster"
+        const val DB_TABLE_SKILLS="skills"
+        const val DB_TABLE_USE_SKILL="useskill"
         const val DB_TABLE_ITEM="item"
     }
 
@@ -20,6 +23,7 @@ class MyDBHelper(context: Context?, name: String?, factory: SQLiteDatabase.Curso
         createPlayerTable(db)
         insertPlayerData(db)
         createMonsterTable(db)
+        insertMonsterData(db)
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVer: Int, newVer: Int) {
@@ -31,29 +35,29 @@ class MyDBHelper(context: Context?, name: String?, factory: SQLiteDatabase.Curso
                 "id INTEGER PRIMARY KEY," +
                 "name TEXT NOT NULL," +
                 "exp INT," +
+                "level INT," +
                 "hp INT," +
+                "maxhp INT," +
                 "stamina INT," +
+                "maxstamina INT," +
                 "atk INT," +
                 "def INT," +
                 "money INT)"
 
         db.execSQL(createTableCommand)
-        //get(0):id
-        //get(1):"name"
-        //get(2):"exp"
-        //get(3):"hp"
-        //get(4):"stamina"
-        //get(5):"atk"
-        //get(6):"def"
-        //get(7):"money"
+
     }
     private fun createMonsterTable(db: SQLiteDatabase) {
-        val createTableCommand = "CREATE TABLE IF NOT EXISTS $DB_TABLE (" +
+        val createTableCommand = "CREATE TABLE IF NOT EXISTS $DB_TABLE_MONSTER (" +
                 "id INTEGER PRIMARY KEY," +
                 "name TEXT NOT NULL," +
+                "picture TEXT NOT NULL,"+
                 "exp INT," +
+                "level INT," +
                 "hp INT," +
+                "maxhp INT," +
                 "stamina INT," +
+                "maxstamina INT," +
                 "atk INT," +
                 "def INT," +
                 "money INT)"
@@ -78,12 +82,53 @@ class MyDBHelper(context: Context?, name: String?, factory: SQLiteDatabase.Curso
             val newRow = ContentValues()
             newRow.put("name", "無名的旅人")
             newRow.put("exp", 0)
+            newRow.put("level",1)
             newRow.put("hp", 10)
+            newRow.put("maxhp", 10)
             newRow.put("stamina", 11)
+            newRow.put("maxstamina",11)
             newRow.put("atk", 1)
             newRow.put("def", 0)
             newRow.put("money", 0)
             db.insert(DB_TABLE, null, newRow)
+        }
+    }
+    private fun insertMonsterData(db: SQLiteDatabase) {
+//        怪物初始化
+        val monster = "SELECT COUNT(*) FROM $DB_TABLE_MONSTER"
+        val cursor = db.rawQuery(monster, null)
+        cursor.moveToFirst()
+        val count = cursor.getInt(0)
+        cursor.close()
+        if (count == 0) {
+            //            老鼠戰士
+            val newRow = ContentValues()
+            newRow.put("name", "老鼠戰士")
+            newRow.put("picture","mouse")
+            newRow.put("exp", 1)
+            newRow.put("level",1)
+            newRow.put("hp", 10)
+            newRow.put("maxhp", 10)
+            newRow.put("stamina", 11)
+            newRow.put("maxstamina",11)
+            newRow.put("atk", 1)
+            newRow.put("def", 0)
+            newRow.put("money", 0)
+            db.insert(DB_TABLE_MONSTER, null, newRow)
+//野豬
+            newRow.clear()
+            newRow.put("name", "野豬")
+            newRow.put("picture","wildboar")
+            newRow.put("exp", 3)
+            newRow.put("level",3)
+            newRow.put("hp", 20)
+            newRow.put("maxhp", 20)
+            newRow.put("stamina", 11)
+            newRow.put("maxstamina",11)
+            newRow.put("atk", 3)
+            newRow.put("def", 0)
+            newRow.put("money", 0)
+            db.insert(DB_TABLE_MONSTER, null, newRow)
         }
     }
     fun getPlayerData(): Cursor {
@@ -94,4 +139,5 @@ class MyDBHelper(context: Context?, name: String?, factory: SQLiteDatabase.Curso
         val db = readableDatabase
         return db.query(DB_TABLE_MONSTER, null, null, null, null, null, null)
     }
+
 }
