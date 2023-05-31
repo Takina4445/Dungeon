@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
     ////////////////////
     ///////////////////
     private fun player_status_change(){
-        
+
         val MyDB: SQLiteDatabase
 // 建立自訂的 FriendDbHelper 物件
         val friDbHp = MyDBHelper(applicationContext, DB_FILE, null, 1)

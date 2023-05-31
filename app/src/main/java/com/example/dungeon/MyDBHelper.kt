@@ -24,6 +24,12 @@ class MyDBHelper(context: Context?, name: String?, factory: SQLiteDatabase.Curso
         insertPlayerData(db)
         createMonsterTable(db)
         insertMonsterData(db)
+        createSkillTable(db)
+        insertSkillrData(db)
+        createSkillTable(db)
+        createUseSkillTable(db)
+        insertUseSkillrData(db)
+
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVer: Int, newVer: Int) {
@@ -71,6 +77,22 @@ class MyDBHelper(context: Context?, name: String?, factory: SQLiteDatabase.Curso
         //get(5):"atk" 基礎攻擊力
         //get(6):"def" 基礎防禦力
         //get(7):"money" 掉落金錢
+    }
+    private fun createSkillTable(db: SQLiteDatabase) {
+        val createTableCommand = "CREATE TABLE IF NOT EXISTS $DB_TABLE_SKILLS (" +
+                "skill_name TEXT," +
+                "skill_damage_multiplier REAL)"
+
+        db.execSQL(createTableCommand)
+    }
+    private fun createUseSkillTable(db: SQLiteDatabase) {
+        val createTableCommand = "CREATE TABLE IF NOT EXISTS $DB_TABLE_USE_SKILL (" +
+                "user_name TEXT," +
+                "skill_name TEXT,"+
+                "FOREIGN KEY (user_name) REFERENCES $DB_TABLE_MONSTER(name)," +
+                "FOREIGN KEY (skill_name) REFERENCES $DB_TABLE_SKILLS(skill_name))"
+
+        db.execSQL(createTableCommand)
     }
     private fun insertPlayerData(db: SQLiteDatabase) {
         val playerDataExistQuery = "SELECT COUNT(*) FROM $DB_TABLE"
@@ -131,6 +153,48 @@ class MyDBHelper(context: Context?, name: String?, factory: SQLiteDatabase.Curso
             db.insert(DB_TABLE_MONSTER, null, newRow)
         }
     }
+    private fun insertSkillrData(db: SQLiteDatabase) {
+        val playerDataExistQuery = "SELECT COUNT(*) FROM $DB_TABLE_SKILLS"
+        val cursor = db.rawQuery(playerDataExistQuery, null)
+        cursor.moveToFirst()
+        val count = cursor.getInt(0)
+        cursor.close()
+        if (count == 0) {
+            val newRow = ContentValues()
+            newRow.put("skill_name", "咬")
+            newRow.put("skill_damage_multiplier",1.3)
+            db.insert(DB_TABLE_SKILLS, null, newRow)
+            newRow.clear()
+            newRow.put("skill_name", "衝撞")
+            newRow.put("skill_damage_multiplier",1.6)
+            db.insert(DB_TABLE_SKILLS, null, newRow)
+            newRow.clear()
+            newRow.put("skill_name", "全力衝撞")
+            newRow.put("skill_damage_multiplier",2.3)
+            db.insert(DB_TABLE_SKILLS, null, newRow)
+        }
+    }
+    private fun insertUseSkillrData(db: SQLiteDatabase) {
+        val playerDataExistQuery = "SELECT COUNT(*) FROM $DB_TABLE_USE_SKILL"
+        val cursor = db.rawQuery(playerDataExistQuery, null)
+        cursor.moveToFirst()
+        val count = cursor.getInt(0)
+        cursor.close()
+        if (count == 0) {
+            val newRow = ContentValues()
+            newRow.put("user_name", "老鼠戰士")
+            newRow.put("skill_name","咬")
+            db.insert(DB_TABLE_USE_SKILL, null, newRow)
+            newRow.clear()
+            newRow.put("user_name", "野豬")
+            newRow.put("skill_name","衝撞")
+            db.insert(DB_TABLE_USE_SKILL, null, newRow)
+            newRow.clear()
+            newRow.put("user_name", "野豬")
+            newRow.put("skill_name","全力衝撞")
+            db.insert(DB_TABLE_USE_SKILL, null, newRow)
+        }
+    }
     fun getPlayerData(): Cursor {
         val db = readableDatabase
         return db.query(DB_TABLE, null, null, null, null, null, null)
@@ -139,5 +203,4 @@ class MyDBHelper(context: Context?, name: String?, factory: SQLiteDatabase.Curso
         val db = readableDatabase
         return db.query(DB_TABLE_MONSTER, null, null, null, null, null, null)
     }
-
 }
