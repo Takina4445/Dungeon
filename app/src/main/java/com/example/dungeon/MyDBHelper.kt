@@ -51,7 +51,17 @@ class MyDBHelper(context: Context?, name: String?, factory: SQLiteDatabase.Curso
                 "money INT)"
 
         db.execSQL(createTableCommand)
-
+        //get(0):id
+        //get(1):"name"
+        //get(2):"exp" 持有經驗
+        //get(3):"level"
+        //get(4):"hp"
+        //get(5):"maxhp"
+        //get(6):"stamina"
+        //get(7):"maxstamina"
+        //get(8):"atk"
+        //get(9):"def"
+        //get(10):"money"
     }
     private fun createMonsterTable(db: SQLiteDatabase) {
         val createTableCommand = "CREATE TABLE IF NOT EXISTS $DB_TABLE_MONSTER (" +

@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var button_item: Button
     private lateinit var button_food: Button
     private lateinit var player_status:TextView
+    private lateinit var battle_log:TextView
     private lateinit var button_battle:Button
     val DB_FILE = "doungeon.db"
     val DB_TABLE = "player"
@@ -70,17 +71,7 @@ class MainActivity : AppCompatActivity() {
         ,Html.FROM_HTML_MODE_LEGACY)
 
     }
-//    private fun player_query(): Cursor? {
-//        val MyDB: SQLiteDatabase
-//// 建立自訂的 FriendDbHelper 物件
-//        val friDbHp = MyDBHelper(applicationContext, DB_FILE, null, 1)
-//
-//        MyDB = friDbHp.writableDatabase
-//        return MyDB.query(
-//            true, DB_TABLE, arrayOf("id","name","exp","hp","syamina","atk","def","money"),
-//            null, null, null, null, null, null
-//        )
-//    }
+
     private val ActivityChange_main = View.OnClickListener {
 
         val intent = Intent()
@@ -100,6 +91,8 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
     private val Activity_battle=View.OnClickListener {
+        val battle_log:TextView=findViewById<TextView>(R.id.textview_battleprocess)//戰鬥紀錄
+        battle_log.text=""
         val MyDB: SQLiteDatabase
 // 建立自訂的 FriendDbHelper 物件
         val friDbHp = MyDBHelper(applicationContext, DB_FILE, null, 1)
@@ -107,6 +100,9 @@ class MainActivity : AppCompatActivity() {
         MyDB = friDbHp.writableDatabase
         val c = friDbHp.getPlayerData()
         c.moveToFirst()
+
+
+
         val newRow = ContentValues()
         val monsterName = "野豬"
         val columnName = "exp"
