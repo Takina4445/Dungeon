@@ -15,6 +15,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import com.example.dungeon.MyDBHelper.Companion.DB_TABLE_MONSTER
 import org.w3c.dom.Text
 import java.util.Arrays
@@ -97,7 +98,7 @@ var i:Int=0
 
     private val Activity_battle=View.OnClickListener {
         val battle_log:TextView=findViewById<TextView>(R.id.textview_battleprocess)//戰鬥紀錄
-//        battle_log.text= ""
+        battle_log.text= ""
 
         val MyDB: SQLiteDatabase
 // 建立自訂的 FriendDbHelper 物件
@@ -166,14 +167,16 @@ var i:Int=0
         var var_battle_random:Int
 
 
-//        while (cursor.getInt(5)>0||c.getInt(4)>0){
+        while (obj_player.getAsInteger("hp")>0&&obj_monster.getAsInteger("hp")>0){
             var var_battle_damage:Int//戰鬥傷害
+            var var_use_stamina:Int//體力消耗
+            var var_battle_reward:String=""//戰鬥獎勵
             var_totalweight=obj_player.getAsInteger("stamina")+obj_monster.getAsInteger("stamina")
 
 
             var_battle_random= Random.nextInt(0,var_totalweight+2)
 //        if (var_battle_random <= c.getInt(6) * (c.getInt(11) / 100)) {
-            if (var_battle_random <= obj_player.getAsInteger("stamina") * (obj_player.getAsInteger("speed")/ obj_monster.getAsInteger("speed"))*0.9) {
+            if (var_battle_random <= (obj_player.getAsInteger("stamina")+1) * (obj_player.getAsInteger("speed")/ obj_monster.getAsInteger("speed"))*0.9) {
                 //玩家回合
                 var_battle_damage=(obj_player.getAsInteger("atk")*1.3-obj_monster.getAsInteger("def")).toInt()
                 battle_log.append(Html.fromHtml(
@@ -183,6 +186,25 @@ var i:Int=0
                                 + "<font color=${Color.WHITE}>使出&nbsp;</font>" + "<font color=${Color.YELLOW}>" + "攻擊" + "&nbsp;</font>"
                                 + "<font color=${Color.WHITE}>造成</font>" + "<font color=${Color.WHITE}>" + var_battle_damage + "點傷害<br></font>",
                         Html.FROM_HTML_MODE_LEGACY))
+                var_use_stamina=(var_battle_damage/30).toInt()+1
+                if (obj_player.getAsInteger("stamina")>=var_use_stamina){
+                    obj_player.put("stamina",obj_player.getAsInteger("stamina")-var_use_stamina)//攻擊扣除體力
+                }
+                else{
+                    obj_player.put("stamina",0)
+                }
+
+                if(obj_monster.getAsInteger("hp")>=var_battle_damage){
+//                    傷害結算
+                    obj_monster.put("hp",obj_monster.getAsInteger("hp")-var_battle_damage)
+                }
+                else{
+                    obj_monster.put("hp",0)
+                    obj_player.put("exp",obj_player.getAsInteger("exp")+obj_monster.getAsInteger("exp"))//戰鬥經驗
+                    var_battle_reward+="exp +"+obj_monster.getAsInteger("exp")
+                    Toast.makeText(applicationContext, "戰鬥勝利 "+var_battle_reward, Toast.LENGTH_SHORT).show()
+                }
+
 
             }
 
@@ -197,8 +219,17 @@ var i:Int=0
                     Html.FROM_HTML_MODE_LEGACY))
             }
 
+
+        }
+        kotlin.run {
+            val newRow=ContentValues()
+            newRow.put("hp",obj_player.getAsInteger("hp"))
+            newRow.put("stamina",obj_player.getAsInteger("stamina"))
+            newRow.put("exp",obj_player.getAsInteger("exp"))
+            MyDB.update(DB_TABLE,newRow,"id='1'",null)
+            player_status_change()
             cursor.close()
-//        }
+        }
 
 
 /*
