@@ -48,7 +48,8 @@ class MyDBHelper(context: Context?, name: String?, factory: SQLiteDatabase.Curso
                 "maxstamina INT," +
                 "atk INT," +
                 "def INT," +
-                "money INT)"
+                "money INT," +
+                "speed INT)"
 
         db.execSQL(createTableCommand)
         //get(0):id
@@ -62,6 +63,7 @@ class MyDBHelper(context: Context?, name: String?, factory: SQLiteDatabase.Curso
         //get(8):"atk"
         //get(9):"def"
         //get(10):"money"
+        //get(11):"speed"
     }
     private fun createMonsterTable(db: SQLiteDatabase) {
         val createTableCommand = "CREATE TABLE IF NOT EXISTS $DB_TABLE_MONSTER (" +
@@ -76,7 +78,8 @@ class MyDBHelper(context: Context?, name: String?, factory: SQLiteDatabase.Curso
                 "maxstamina INT," +
                 "atk INT," +
                 "def INT," +
-                "money INT)"
+                "money INT,"+
+                "speed INT)"
 
         db.execSQL(createTableCommand)
         //get(0):id
@@ -87,6 +90,7 @@ class MyDBHelper(context: Context?, name: String?, factory: SQLiteDatabase.Curso
         //get(5):"atk" 基礎攻擊力
         //get(6):"def" 基礎防禦力
         //get(7):"money" 掉落金錢
+
     }
     private fun createSkillTable(db: SQLiteDatabase) {
         val createTableCommand = "CREATE TABLE IF NOT EXISTS $DB_TABLE_SKILLS (" +
@@ -122,6 +126,7 @@ class MyDBHelper(context: Context?, name: String?, factory: SQLiteDatabase.Curso
             newRow.put("atk", 1)
             newRow.put("def", 0)
             newRow.put("money", 0)
+            newRow.put("speed", 5)
             db.insert(DB_TABLE, null, newRow)
         }
     }
@@ -146,6 +151,7 @@ class MyDBHelper(context: Context?, name: String?, factory: SQLiteDatabase.Curso
             newRow.put("atk", 1)
             newRow.put("def", 0)
             newRow.put("money", 0)
+            newRow.put("speed", 2)
             db.insert(DB_TABLE_MONSTER, null, newRow)
 //野豬
             newRow.clear()
@@ -160,6 +166,7 @@ class MyDBHelper(context: Context?, name: String?, factory: SQLiteDatabase.Curso
             newRow.put("atk", 3)
             newRow.put("def", 0)
             newRow.put("money", 0)
+            newRow.put("speed", 2)
             db.insert(DB_TABLE_MONSTER, null, newRow)
         }
     }
