@@ -1,24 +1,29 @@
 package com.example.dungeon
 
-import android.annotation.SuppressLint
+//import android.annotation.SuppressLint
+//import android.app.NotificationManager
 import android.content.ContentValues
-import android.content.Context
+//import android.content.Context
 import android.content.Intent
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
-import android.database.sqlite.SQLiteOpenHelper
+//import android.database.sqlite.SQLiteOpenHelper
 import android.graphics.Color
+//import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+//import android.provider.Settings
 import android.text.Html
-import android.util.Log
+//import android.text.method.ScrollingMovementMethod
+//import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
-import com.example.dungeon.MyDBHelper.Companion.DB_TABLE_MONSTER
-import org.w3c.dom.Text
-import java.util.Arrays
+//import android.widget.Toast
+//import com.example.dungeon.MyDBHelper.Companion.DB_TABLE_MONSTER
+//import com.google.android.material.snackbar.Snackbar
+//import org.w3c.dom.Text
+//import java.util.Arrays
 import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
@@ -28,6 +33,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var player_status:TextView
     private lateinit var battle_log:TextView
     private lateinit var button_battle:Button
+    private lateinit var button_rest:Button
     val DB_FILE = "doungeon.db"
     val DB_TABLE = "player"
     val DB_TABLE_MONSTER = "monster"
@@ -40,16 +46,19 @@ var i:Int=0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         val button_main:Button=findViewById<Button>(R.id.button1)
         val button_item:Button=findViewById<Button>(R.id.button2)
         val button_food:Button=findViewById<Button>(R.id.button3)
 //        val textview_player_status:TextView=findViewById<TextView>(R.id.textview_status)
         //在fun player_status_change()中
         val button_battle:Button=findViewById<Button>(R.id.button_battle)
+        val button_rest:Button=findViewById<Button>(R.id.button_rest)
         button_main.setOnClickListener(ActivityChange_main)
         button_item.setOnClickListener(ActivityChange_item)
         button_food.setOnClickListener(ActivityChange_food)
         button_battle.setOnClickListener(Activity_battle)
+        button_rest.setOnClickListener(Activity_rest)
         player_status_change()//刷新玩家資料
         val battle_log:TextView=findViewById<TextView>(R.id.textview_battleprocess)//戰鬥紀錄
         battle_log.text= ""
@@ -57,6 +66,29 @@ var i:Int=0
     }
 
     ////////////////////
+    private fun Cursor_To_ContentValues(c:Cursor):ContentValues{
+        c.moveToFirst()
+        val obj_player = ContentValues()
+        var columnCount = c.columnCount-1
+        do{
+            for (i in 0..columnCount) {
+                val columnName = c.getColumnName(i)
+                val columnType = c.getType(i)
+                when (columnType) {
+                    Cursor.FIELD_TYPE_INTEGER -> {
+                        val intValue = c.getInt(i)
+                        obj_player.put(columnName, intValue)
+                    }
+
+                    Cursor.FIELD_TYPE_STRING -> {
+                        val stringValue = c.getString(i)
+                        obj_player.put(columnName, stringValue)
+                    }
+                }
+            }
+        }while (c.moveToNext())
+        return obj_player
+    }
     ///////////////////
     private fun player_status_change(){
 
@@ -66,13 +98,29 @@ var i:Int=0
 
         MyDB = friDbHp.writableDatabase
         val c = friDbHp.getPlayerData()
-        c.moveToFirst();
+        c.moveToFirst()
+        //        將玩家數值存入
+        var obj_player :ContentValues = Cursor_To_ContentValues(c)
+
+
         val textview_player_status:TextView=findViewById<TextView>(R.id.textview_status)
         textview_player_status.text=Html.fromHtml(
-            "<font color=${Color.GREEN}>生命:</font>"+"<font color=${Color.WHITE}>"+c.getInt(4)+"/"+c.getInt(5)+"<br></font>"
-                +"<font color=${Color.GREEN}>體力:</font>"+"<font color=${Color.WHITE}>"+c.getInt(6)+"/"+c.getInt(7)+"<br></font>"
-                +"<font color=${Color.GREEN}>攻擊力:</font>"+"<font color=${Color.WHITE}>"+c.getInt(8)+"<br></font>"
-                +"<font color=${Color.GREEN}>防禦力:</font>"+"<font color=${Color.WHITE}>"+c.getInt(9)+"<br></font>"
+        "<font color=${Color.GREEN}>Lv.</font>"
+                +"<font color=${Color.WHITE}>"+obj_player.getAsInteger("level")+"<br></font>"
+                +"<font color=${Color.GREEN}>exp:</font>"
+                +"<font color=${Color.WHITE}>"+obj_player.getAsInteger("exp")+"<br></font>"
+                +"<font color=${Color.GREEN}>生命:</font>"
+                +"<font color=${Color.WHITE}>"+obj_player.getAsInteger("hp")+"/"+obj_player.getAsInteger("maxhp")+"<br></font>"
+                +"<font color=${Color.GREEN}>體力:</font>"
+                +"<font color=${Color.WHITE}>"+obj_player.getAsInteger("stamina")+"/"+obj_player.getAsInteger("maxstamina")+"<br></font>"
+                +"<font color=${Color.GREEN}>攻擊力:</font>"
+                +"<font color=${Color.WHITE}>"+obj_player.getAsInteger("atk")+"<br></font>"
+                +"<font color=${Color.GREEN}>防禦力:</font>"
+                +"<font color=${Color.WHITE}>"+obj_player.getAsInteger("def")+"<br></font>"
+                +"<font color=${Color.GREEN}>速度:</font>"
+                +"<font color=${Color.WHITE}>"+obj_player.getAsInteger("speed")+"<br></font>"
+                +"<font color=${Color.GREEN}>金錢:</font>"
+                +"<font color=${Color.WHITE}>"+obj_player.getAsInteger("money")+"<br></font>"
         ,Html.FROM_HTML_MODE_LEGACY)
 
     }
@@ -97,6 +145,7 @@ var i:Int=0
     }
 
     private val Activity_battle=View.OnClickListener {
+
         val battle_log:TextView=findViewById<TextView>(R.id.textview_battleprocess)//戰鬥紀錄
         battle_log.text= ""
 
@@ -107,27 +156,7 @@ var i:Int=0
         MyDB = friDbHp.writableDatabase
         val c = friDbHp.getPlayerData()
         c.moveToFirst()
-        val obj_player = ContentValues()
-//        將玩家數值存入
-        var columnCount = c.columnCount-1
-        do{
-            for (i in 0..columnCount) {
-                val columnName = c.getColumnName(i)
-                val columnType = c.getType(i)
-                when (columnType) {
-                    Cursor.FIELD_TYPE_INTEGER -> {
-                        val intValue = c.getInt(i)
-                        obj_player.put(columnName, intValue)
-                    }
-
-                    Cursor.FIELD_TYPE_STRING -> {
-                        val stringValue = c.getString(i)
-                        obj_player.put(columnName, stringValue)
-                    }
-                }
-            }
-        }while (c.moveToNext())
-        c.moveToFirst()
+        var obj_player :ContentValues = Cursor_To_ContentValues(c)
 //怪物選擇
         val selection = "id = ?"
         val selectionArgs = arrayOf(Random.nextInt(1, 3).toString())
@@ -137,40 +166,20 @@ var i:Int=0
 
         cursor.moveToFirst()
 
-        val obj_monster = ContentValues()
-//        將怪物數值存入
-        columnCount = cursor.columnCount-1
-        do{
-            for (i in 0..columnCount) {
-                val columnName = cursor.getColumnName(i)
-                val columnType = cursor.getType(i)
-                when (columnType) {
-                    Cursor.FIELD_TYPE_INTEGER -> {
-                        val intValue = cursor.getInt(i)
-                        obj_monster.put(columnName, intValue)
-                    }
-
-                    Cursor.FIELD_TYPE_STRING -> {
-                        val stringValue = cursor.getString(i)
-                        obj_monster.put(columnName, stringValue)
-                    }
-                }
-            }
-        }while (cursor.moveToNext())
-        cursor.moveToFirst()
+        var obj_monster :ContentValues = Cursor_To_ContentValues(cursor)
 
 
 
 //        val monsterName =obj_monster.get("name")
 //        battle_log.text=monsterName
+            var var_battle_damage:Int//戰鬥傷害
         var var_totalweight:Int
         var var_battle_random:Int
-
+        var var_use_stamina:Int//體力消耗
+        var var_battle_reward:String=""//戰鬥獎勵
 
         while (obj_player.getAsInteger("hp")>0&&obj_monster.getAsInteger("hp")>0){
-            var var_battle_damage:Int//戰鬥傷害
-            var var_use_stamina:Int//體力消耗
-            var var_battle_reward:String=""//戰鬥獎勵
+
             var_totalweight=obj_player.getAsInteger("stamina")+obj_monster.getAsInteger("stamina")
 
 
@@ -178,7 +187,13 @@ var i:Int=0
 //        if (var_battle_random <= c.getInt(6) * (c.getInt(11) / 100)) {
             if (var_battle_random <= (obj_player.getAsInteger("stamina")+1) * (obj_player.getAsInteger("speed")/ obj_monster.getAsInteger("speed"))*0.9) {
                 //玩家回合
-                var_battle_damage=(obj_player.getAsInteger("atk")*1.3-obj_monster.getAsInteger("def")).toInt()
+//                var_battle_damage=(obj_player.getAsInteger("atk")*1.3-obj_monster.getAsInteger("def")).toInt()
+
+                var_battle_damage=(obj_player.getAsInteger("atk")*2-obj_monster.getAsInteger("def"))
+                var_battle_damage-=((obj_player.getAsInteger("maxstamina")-obj_player.getAsInteger("stamina"))/10).toInt()
+                if(var_battle_damage<=0){
+                    var_battle_damage=1
+                }
                 battle_log.append(Html.fromHtml(
                         "<font color=${Color.CYAN}>" + obj_player.get("name") + "&nbsp;</font>"
                                 + "<font color=${Color.WHITE}>對&nbsp;</font>"
@@ -200,10 +215,16 @@ var i:Int=0
                 }
                 else{
                     obj_monster.put("hp",0)
-                    obj_player.put("exp",obj_player.getAsInteger("exp")+obj_monster.getAsInteger("exp"))//戰鬥經驗
-                    var_battle_reward+="exp +"+obj_monster.getAsInteger("exp")
-                    Toast.makeText(applicationContext, "戰鬥勝利 "+var_battle_reward, Toast.LENGTH_SHORT).show()
                 }
+
+
+
+//                    val snackbar = Snackbar.make(findViewById(R.id.battle_layout), "123", Snackbar.LENGTH_SHORT)
+//                    snackbar.show()
+//                    Snackbar.make(findViewById(R.id.battle_layout), "戰鬥勝利 "+var_battle_reward, Snackbar.LENGTH_SHORT).show();
+//                    Toast.makeText(applicationContext, "戰鬥勝利 "+var_battle_reward, Toast.LENGTH_SHORT).show()
+//                    toast部分裝置無法顯示
+
 
 
             }
@@ -222,12 +243,25 @@ var i:Int=0
 
         }
         kotlin.run {
+            if(obj_player.getAsInteger("hp")>0){
+//                玩家獲勝
+                obj_player.put("exp",obj_player.getAsInteger("exp")+obj_monster.getAsInteger("exp"))//戰鬥經驗
+                battle_log.append(Html.fromHtml(
+                    "<font color=${Color.WHITE}>戰鬥勝利，獲得&nbsp;</font>"
+                            + "<font color=${Color.GREEN}>exp+"+obj_monster.getAsInteger("exp")+"</font>"
+                            + "<font color=${Color.WHITE}>,"+var_battle_reward+"</font>",
+                    Html.FROM_HTML_MODE_LEGACY))
+            }
             val newRow=ContentValues()
             newRow.put("hp",obj_player.getAsInteger("hp"))
             newRow.put("stamina",obj_player.getAsInteger("stamina"))
             newRow.put("exp",obj_player.getAsInteger("exp"))
             MyDB.update(DB_TABLE,newRow,"id='1'",null)
             player_status_change()
+            newRow.clear()
+            obj_player.clear()
+            obj_monster.clear()
+            c.close()
             cursor.close()
         }
 
@@ -256,6 +290,59 @@ var i:Int=0
     }
 
     /////////
+    private val Activity_rest=View.OnClickListener {
+        val MyDB: SQLiteDatabase
+// 建立自訂的 FriendDbHelper 物件
+        val friDbHp = MyDBHelper(applicationContext, DB_FILE, null, 1)
+
+        MyDB = friDbHp.writableDatabase
+        val c = friDbHp.getPlayerData()
+        c.moveToFirst()
+        val obj_player = ContentValues()
+//        將玩家數值存入
+        var columnCount = c.columnCount-1
+        do{
+            for (i in 0..columnCount) {
+                val columnName = c.getColumnName(i)
+                val columnType = c.getType(i)
+                when (columnType) {
+                    Cursor.FIELD_TYPE_INTEGER -> {
+                        val intValue = c.getInt(i)
+                        obj_player.put(columnName, intValue)
+                    }
+
+                    Cursor.FIELD_TYPE_STRING -> {
+                        val stringValue = c.getString(i)
+                        obj_player.put(columnName, stringValue)
+                    }
+                }
+            }
+        }while (c.moveToNext())
+        c.moveToFirst()
+        val newRow=ContentValues()
+        var var_heal_hp_add:Int=3
+        var var_heal_hp:Int
+        var var_heal_stamina_add:Int=5
+        var var_heal_stamina:Int
+        if(obj_player.getAsInteger("hp")+var_heal_hp_add<=obj_player.getAsInteger("maxhp")){
+            var_heal_hp=obj_player.getAsInteger("hp")+var_heal_hp_add
+        }
+        else{
+            var_heal_hp=obj_player.getAsInteger("maxhp")
+        }
+        if(obj_player.getAsInteger("stamina")+var_heal_stamina_add<=obj_player.getAsInteger("maxstamina")){
+            var_heal_stamina=obj_player.getAsInteger("stamina")+var_heal_stamina_add
+        }
+        else{
+            var_heal_stamina=obj_player.getAsInteger("maxstamina")
+        }
+        newRow.put("hp",var_heal_hp)
+        newRow.put("stamina",var_heal_stamina)
+        MyDB.update(DB_TABLE,newRow,"id='1'",null)
+        player_status_change()
+        c.close()
+    }
+
     /////////
     override fun onBackPressed() {
 //        封鎖返回鍵
