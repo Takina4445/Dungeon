@@ -9,6 +9,7 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 //import android.database.sqlite.SQLiteOpenHelper
 import android.graphics.Color
+import android.os.Build.VERSION_CODES.N
 //import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -84,11 +85,31 @@ var i:Int=0
                         val stringValue = c.getString(i)
                         obj_player.put(columnName, stringValue)
                     }
+                    Cursor.FIELD_TYPE_FLOAT -> {
+                        val floatValue = c.getDouble(i)
+                        obj_player.put(columnName, floatValue)
+                    }
                 }
             }
         }while (c.moveToNext())
         return obj_player
     }
+    ///////////////////
+    fun Cursor_to_HashMap(cursor: Cursor): HashMap<String, Double> {
+        val hashMap = HashMap<String, Double>()
+        cursor.moveToFirst()
+        while (!cursor.isAfterLast) {
+//            val columnCount = cursor.columnCount
+//            for (i in 0 until columnCount) {
+                val columnName = cursor.getString(0)
+                hashMap.put(columnName,cursor.getDouble(1))
+//            }
+            cursor.moveToNext()
+        }
+        return hashMap
+    }
+
+
     ///////////////////
     private fun player_status_change(){
 
@@ -168,22 +189,32 @@ var i:Int=0
 
         var obj_monster :ContentValues = Cursor_To_ContentValues(cursor)
 
+        var db_table="monster LEFT JOIN useskill ON monster.name = useskill.user_name LEFT JOIN skills ON useskill.skill_name = skills.skill_name"
+        var db_columns= arrayOf("skills.skill_name","skills.skill_damage_multiplier")
 
+        val skill_cursor = MyDB.query(db_table,db_columns ,selection, selectionArgs, null, null, null)
+//        var obj_skill_list:ContentValues=Cursor_To_ContentValues(skill_cursor)
 
+        var obj_skill_list=Cursor_to_HashMap(skill_cursor)
+        obj_skill_list.put("攻擊",1.3)
 //        val monsterName =obj_monster.get("name")
 //        battle_log.text=monsterName
             var var_battle_damage:Int//戰鬥傷害
+        var var_battle_skill_multiplier:Double
         var var_totalweight:Int
         var var_battle_random:Int
         var var_use_stamina:Int//體力消耗
         var var_battle_reward:String=""//戰鬥獎勵
         var var_battle_round:Int=0
+        var var_monster_weaken:Double=1.0//怪獸傷害削弱
+
         while (obj_player.getAsInteger("hp")>0&&obj_monster.getAsInteger("hp")>0){
             var_battle_round+=1
             var_totalweight=obj_player.getAsInteger("stamina")+obj_monster.getAsInteger("stamina")
 
 
             var_battle_random= Random.nextInt(0,var_totalweight+2)
+
 //        if (var_battle_random <= c.getInt(6) * (c.getInt(11) / 100)) {
             if (var_battle_random <= (obj_player.getAsInteger("stamina")+1) * (obj_player.getAsInteger("speed")/ obj_monster.getAsInteger("speed"))*0.9) {
                 //玩家回合
@@ -232,12 +263,35 @@ var i:Int=0
 
             else {
                 //怪物回合
+                val keys = obj_skill_list.keys.toList() // 取得所有鍵集合並轉為列表
+                val randomKey = keys[Random.nextInt(keys.size)] // 隨機選取一個鍵
+                var_battle_damage=(obj_monster.getAsInteger("atk")* obj_skill_list.get(randomKey)!!).toInt()
+                var_battle_damage=(var_battle_damage/var_monster_weaken-obj_player.getAsInteger("def")).toInt()
+                var_battle_damage*=((obj_monster.getAsInteger("maxstamina")-obj_monster.getAsInteger("stamina"))/20.0+1).toInt()
+                if(var_battle_damage<=0){
+                    var_battle_damage=1
+                }
+                var_use_stamina=(var_battle_damage/30).toInt()+1
+                if (obj_monster.getAsInteger("stamina")>=var_use_stamina){
+                    obj_monster.put("stamina",obj_monster.getAsInteger("stamina")-var_use_stamina)//攻擊扣除體力
+                }
+                else{
+                    obj_monster.put("stamina",0)
+                }
+                if(obj_player.getAsInteger("hp")>=var_battle_damage){
+//                    傷害結算
+                    obj_player.put("hp",obj_player.getAsInteger("hp")-var_battle_damage)
+                }
+                else{
+                    obj_player.put("hp",0)
+                }
+
                 battle_log.append(Html.fromHtml("<font color=${Color.WHITE}>"+var_battle_round+".&nbsp;</font>"
                             +"<font color=${Color.RED}>" + obj_monster.get("name") + "&nbsp;</font>"
                             + "<font color=${Color.WHITE}>對&nbsp;</font>"
                             + "<font color=${Color.CYAN}>" + obj_player.get("name") + "&nbsp;</font>"
-                            + "<font color=${Color.WHITE}>使出&nbsp;</font>" + "<font color=${Color.YELLOW}>" + "攻擊" + "&nbsp;</font>"
-                            + "<font color=${Color.WHITE}>造成</font>" + "<font color=${Color.WHITE}>" + 3 + "點傷害<br></font>",
+                            + "<font color=${Color.WHITE}>使出&nbsp;</font>" + "<font color=${Color.YELLOW}>" + randomKey+ "&nbsp;</font>"
+                            + "<font color=${Color.WHITE}>造成</font>" + "<font color=${Color.WHITE}>" + var_battle_damage + "點傷害<br></font>",
                     Html.FROM_HTML_MODE_LEGACY))
             }
 
@@ -251,6 +305,11 @@ var i:Int=0
                     "<font color=${Color.WHITE}>戰鬥勝利，獲得&nbsp;</font>"
                             + "<font color=${Color.GREEN}>exp+"+obj_monster.getAsInteger("exp")+"</font>"
                             + "<font color=${Color.WHITE}>,"+var_battle_reward+"</font>",
+                    Html.FROM_HTML_MODE_LEGACY))
+            }
+            else{
+                battle_log.append(Html.fromHtml(
+                    "<font color=${Color.RED}>戰鬥失敗，失去...</font>",
                     Html.FROM_HTML_MODE_LEGACY))
             }
             val newRow=ContentValues()
