@@ -2,6 +2,7 @@ package com.example.dungeon
 
 //import android.annotation.SuppressLint
 //import android.app.NotificationManager
+import android.app.AlertDialog
 import android.content.ContentValues
 //import android.content.Context
 import android.content.Intent
@@ -41,7 +42,7 @@ class MainActivity : AppCompatActivity() {
     val DB_TABLE_SKILLS="skills"
     val DB_TABLE_USE_SKILL="useskill"
     val DB_TABLE_ITEM="item"
-var i:Int=0
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -145,7 +146,14 @@ var i:Int=0
         ,Html.FROM_HTML_MODE_LEGACY)
 
     }
-
+    fun Is_Die(){
+        val button_battle:Button=findViewById<Button>(R.id.button_battle)
+        button_battle.isEnabled=false
+    }
+    fun Is_Heal(){
+        val button_battle:Button=findViewById<Button>(R.id.button_battle)
+        button_battle.isEnabled=true
+    }
     private val ActivityChange_main = View.OnClickListener {
 
         val intent = Intent()
@@ -178,6 +186,14 @@ var i:Int=0
         val c = friDbHp.getPlayerData()
         c.moveToFirst()
         var obj_player :ContentValues = Cursor_To_ContentValues(c)
+        if(obj_player.getAsInteger("hp")<=0){
+            AlertDialog.Builder(this)  //參數放要傳入的 MainActivity Context
+                .setMessage("老哥，你已經死了")
+                .setPositiveButton("確認",null)
+                .create()
+                .show()
+            Is_Die()
+        }else{
 //怪物選擇
         val selection = "id = ?"
         val selectionArgs = arrayOf(Random.nextInt(1, 3).toString())
@@ -199,7 +215,7 @@ var i:Int=0
         obj_skill_list.put("攻擊",1.3)
 //        val monsterName =obj_monster.get("name")
 //        battle_log.text=monsterName
-            var var_battle_damage:Int//戰鬥傷害
+        var var_battle_damage:Int//戰鬥傷害
         var var_battle_skill_multiplier:Double
         var var_totalweight:Int
         var var_battle_random:Int
@@ -248,17 +264,11 @@ var i:Int=0
                 else{
                     obj_monster.put("hp",0)
                 }
-
-
-
 //                    val snackbar = Snackbar.make(findViewById(R.id.battle_layout), "123", Snackbar.LENGTH_SHORT)
 //                    snackbar.show()
 //                    Snackbar.make(findViewById(R.id.battle_layout), "戰鬥勝利 "+var_battle_reward, Snackbar.LENGTH_SHORT).show();
 //                    Toast.makeText(applicationContext, "戰鬥勝利 "+var_battle_reward, Toast.LENGTH_SHORT).show()
 //                    toast部分裝置無法顯示
-
-
-
             }
 
             else {
@@ -298,31 +308,49 @@ var i:Int=0
 
         }
         kotlin.run {
-            if(obj_player.getAsInteger("hp")>0){
+            if (obj_player.getAsInteger("hp") > 0) {
 //                玩家獲勝
-                obj_player.put("exp",obj_player.getAsInteger("exp")+obj_monster.getAsInteger("exp"))//戰鬥經驗
-                battle_log.append(Html.fromHtml(
-                    "<font color=${Color.WHITE}>戰鬥勝利，獲得&nbsp;</font>"
-                            + "<font color=${Color.GREEN}>exp+"+obj_monster.getAsInteger("exp")+"</font>"
-                            + "<font color=${Color.WHITE}>,"+var_battle_reward+"</font>",
-                    Html.FROM_HTML_MODE_LEGACY))
+                obj_player.put(
+                    "exp",
+                    obj_player.getAsInteger("exp") + obj_monster.getAsInteger("exp")
+                )//戰鬥經驗
+                obj_player.put(
+                    "money",
+                    obj_player.getAsInteger("money") + obj_monster.getAsInteger("money")
+                )//戰鬥金幣
+                battle_log.append(
+                    Html.fromHtml(
+                        "<font color=${Color.WHITE}>戰鬥勝利，獲得&nbsp;</font>"
+                                + "<font color=${Color.GREEN}>exp+" + obj_monster.getAsInteger("exp") + "</font>"
+                                + "<font color=${Color.WHITE}>,</font>"
+                                + "<font color=${Color.YELLOW}>金幣+" + obj_monster.getAsInteger("money") + "</font>"
+//                            + "<font color=${Color.WHITE}>,"+var_battle_reward+"</font>"
+                        //戰鬥掉落物
+                        , Html.FROM_HTML_MODE_LEGACY
+                    )
+                )
+            } else {
+                battle_log.append(
+                    Html.fromHtml(
+                        "<font color=${Color.RED}>戰鬥失敗，失去...</font>",
+                        Html.FROM_HTML_MODE_LEGACY
+                    )
+                )
+                Is_Die()
             }
-            else{
-                battle_log.append(Html.fromHtml(
-                    "<font color=${Color.RED}>戰鬥失敗，失去...</font>",
-                    Html.FROM_HTML_MODE_LEGACY))
-            }
-            val newRow=ContentValues()
-            newRow.put("hp",obj_player.getAsInteger("hp"))
-            newRow.put("stamina",obj_player.getAsInteger("stamina"))
-            newRow.put("exp",obj_player.getAsInteger("exp"))
-            MyDB.update(DB_TABLE,newRow,"id='1'",null)
+            val newRow = ContentValues()
+            newRow.put("hp", obj_player.getAsInteger("hp"))
+            newRow.put("stamina", obj_player.getAsInteger("stamina"))
+            newRow.put("exp", obj_player.getAsInteger("exp"))
+            newRow.put("money", obj_player.getAsInteger("money"))
+            MyDB.update(DB_TABLE, newRow, "id='1'", null)
             player_status_change()
             newRow.clear()
             obj_player.clear()
             obj_monster.clear()
             c.close()
             cursor.close()
+        }
         }
 
 
@@ -358,49 +386,48 @@ var i:Int=0
         MyDB = friDbHp.writableDatabase
         val c = friDbHp.getPlayerData()
         c.moveToFirst()
-        val obj_player = ContentValues()
-//        將玩家數值存入
-        var columnCount = c.columnCount-1
-        do{
-            for (i in 0..columnCount) {
-                val columnName = c.getColumnName(i)
-                val columnType = c.getType(i)
-                when (columnType) {
-                    Cursor.FIELD_TYPE_INTEGER -> {
-                        val intValue = c.getInt(i)
-                        obj_player.put(columnName, intValue)
-                    }
+        val obj_player:ContentValues=Cursor_To_ContentValues(c)
 
-                    Cursor.FIELD_TYPE_STRING -> {
-                        val stringValue = c.getString(i)
-                        obj_player.put(columnName, stringValue)
-                    }
-                }
-            }
-        }while (c.moveToNext())
+//        將玩家數值存入
+
         c.moveToFirst()
         val newRow=ContentValues()
-        var var_heal_hp_add:Int=3
+        var var_heal_hp_add:Int
         var var_heal_hp:Int
-        var var_heal_stamina_add:Int=5
+        var var_heal_stamina_add:Int
         var var_heal_stamina:Int
-        if(obj_player.getAsInteger("hp")+var_heal_hp_add<=obj_player.getAsInteger("maxhp")){
-            var_heal_hp=obj_player.getAsInteger("hp")+var_heal_hp_add
+        var var_rest_need_money=1//休息消耗金幣 改比率
+        if(obj_player.getAsInteger("money")>=var_rest_need_money){
+            var_heal_hp_add=((obj_player.getAsInteger("maxhp")-obj_player.getAsInteger("hp"))*0.4).toInt()
+            var_heal_stamina_add=((obj_player.getAsInteger("maxstamina")-obj_player.getAsInteger("stamina"))*0.4).toInt()
+            if(obj_player.getAsInteger("hp")+var_heal_hp_add<=obj_player.getAsInteger("maxhp")){
+                var_heal_hp=obj_player.getAsInteger("hp")+var_heal_hp_add
+            }
+            else{
+                var_heal_hp=obj_player.getAsInteger("maxhp")
+            }
+            if(obj_player.getAsInteger("stamina")+var_heal_stamina_add<=obj_player.getAsInteger("maxstamina")){
+                var_heal_stamina=obj_player.getAsInteger("stamina")+var_heal_stamina_add
+            }
+            else{
+                var_heal_stamina=obj_player.getAsInteger("maxstamina")
+            }
+            newRow.put("hp",var_heal_hp)
+            newRow.put("stamina",var_heal_stamina)
+            newRow.put("money",obj_player.getAsInteger("money")-var_rest_need_money)
+            MyDB.update(DB_TABLE,newRow,"id='1'",null)
+
+            Is_Heal()
         }
         else{
-            var_heal_hp=obj_player.getAsInteger("maxhp")
+            AlertDialog.Builder(this)  //參數放要傳入的 MainActivity Context
+                .setMessage("您的金幣不足"+var_rest_need_money+"")
+                .setPositiveButton("確認",null)
+                .create()
+                .show()
         }
-        if(obj_player.getAsInteger("stamina")+var_heal_stamina_add<=obj_player.getAsInteger("maxstamina")){
-            var_heal_stamina=obj_player.getAsInteger("stamina")+var_heal_stamina_add
-        }
-        else{
-            var_heal_stamina=obj_player.getAsInteger("maxstamina")
-        }
-        newRow.put("hp",var_heal_hp)
-        newRow.put("stamina",var_heal_stamina)
-        MyDB.update(DB_TABLE,newRow,"id='1'",null)
-        player_status_change()
         c.close()
+        player_status_change()
     }
 
     /////////
