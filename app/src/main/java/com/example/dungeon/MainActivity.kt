@@ -2,6 +2,7 @@ package com.example.dungeon
 
 //import android.annotation.SuppressLint
 //import android.app.NotificationManager
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.ContentValues
 //import android.content.Context
@@ -36,13 +37,17 @@ class MainActivity : AppCompatActivity() {
     private lateinit var battle_log:TextView
     private lateinit var button_battle:Button
     private lateinit var button_rest:Button
+    private lateinit var button_place_1:Button
+    private lateinit var button_place_2:Button
+    private lateinit var button_place_3:Button
     val DB_FILE = "doungeon.db"
     val DB_TABLE = "player"
     val DB_TABLE_MONSTER = "monster"
     val DB_TABLE_SKILLS="skills"
     val DB_TABLE_USE_SKILL="useskill"
     val DB_TABLE_ITEM="item"
-
+    var public_var_dungeon_place:Int=1
+    var public_var_dungeon_level:Int=1
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,15 +61,38 @@ class MainActivity : AppCompatActivity() {
         //在fun player_status_change()中
         val button_battle:Button=findViewById<Button>(R.id.button_battle)
         val button_rest:Button=findViewById<Button>(R.id.button_rest)
+        val button_place_1:Button=findViewById<Button>(R.id.button_place1)
+        val button_place_2:Button=findViewById<Button>(R.id.button_place2)
+        val button_place_3:Button=findViewById<Button>(R.id.button_place3)
         button_main.setOnClickListener(ActivityChange_main)
         button_item.setOnClickListener(ActivityChange_item)
         button_food.setOnClickListener(ActivityChange_food)
         button_battle.setOnClickListener(Activity_battle)
         button_rest.setOnClickListener(Activity_rest)
+        button_place_1.setOnClickListener(ActivityChange_Place_1)
+        button_place_2.setOnClickListener(ActivityChange_Place_2)
+        button_place_3.setOnClickListener(ActivityChange_Place_3)
         player_status_change()//刷新玩家資料
         val battle_log:TextView=findViewById<TextView>(R.id.textview_battleprocess)//戰鬥紀錄
         battle_log.text= ""
 
+    }
+    ////////////////////
+    private val ActivityChange_Place_1= View.OnClickListener{
+        //切換至主place1
+        public_var_dungeon_place=1
+        public_var_dungeon_level=1
+
+    }
+    private val ActivityChange_Place_2= View.OnClickListener{
+        //切換至主place1
+        public_var_dungeon_place=2
+        public_var_dungeon_level=1
+    }
+    private val ActivityChange_Place_3= View.OnClickListener{
+        //切換至主place1
+        public_var_dungeon_place=3
+        public_var_dungeon_level=1
     }
 
     ////////////////////
@@ -109,7 +137,27 @@ class MainActivity : AppCompatActivity() {
         }
         return hashMap
     }
+    ///////////////////
+    fun monster_level_count(cursor:ContentValues,obj_level:Int):ContentValues{
+        var var_level_cursor:ContentValues=cursor
+        var level:Double=obj_level.toDouble()
+        var_level_cursor.put("hp",monster_level_count_put("hp",var_level_cursor,level))
+        var_level_cursor.put("maxhp",monster_level_count_put("maxhp",var_level_cursor,level))
+        var_level_cursor.put("stamina",monster_level_count_put("stamina",var_level_cursor,level))
+        var_level_cursor.put("maxstamina",monster_level_count_put("maxstamina",var_level_cursor,level))
+        var_level_cursor.put("atk",monster_level_count_put("atk",var_level_cursor,level))
+        var_level_cursor.put("def",monster_level_count_put("def",var_level_cursor,level))
+        var_level_cursor.put("speed",monster_level_count_put("speed",var_level_cursor,level))
+        var_level_cursor.put("exp",monster_level_count_put("exp",var_level_cursor,level))
+        var_level_cursor.put("money",monster_level_count_put("money",var_level_cursor,level))
+        return var_level_cursor
+    }
+    ///////////////////
 
+    private fun monster_level_count_put(key: String, cursor: ContentValues, level: Double): Int{
+        var var_pow_per_level:Double=1.1
+        return ((cursor.getAsInteger(key)+1)*Math.pow(var_pow_per_level, (level-1.0)) + level-2).toInt()
+    }
 
     ///////////////////
     private fun player_status_change(){
@@ -145,6 +193,34 @@ class MainActivity : AppCompatActivity() {
                 +"<font color=${Color.WHITE}>"+obj_player.getAsInteger("money")+"<br></font>"
         ,Html.FROM_HTML_MODE_LEGACY)
 
+    }
+    private fun monster_status_change(obj_monster:ContentValues,level:Int){
+        val textview_monster_status:TextView=findViewById<TextView>(R.id.textview_EnemyStatus)
+        textview_monster_status.text=Html.fromHtml(
+            "<font color=${Color.RED}>"+obj_monster.getAsString("name")+"<br></font>"
+                    +"<font color=${Color.RED}>Lv.</font>"
+                    +"<font color=${Color.WHITE}>"+level+"<br></font>"
+                    +"<font color=${Color.RED}>生命:</font>"
+                    +"<font color=${Color.WHITE}>"+obj_monster.getAsInteger("hp")+"/"+obj_monster.getAsInteger("maxhp")+"<br></font>"
+                    +"<font color=${Color.RED}>體力:</font>"
+                    +"<font color=${Color.WHITE}>"+obj_monster.getAsInteger("stamina")+"/"+obj_monster.getAsInteger("maxstamina")+"<br></font>"
+                    +"<font color=${Color.RED}>攻擊力:</font>"
+                    +"<font color=${Color.WHITE}>"+obj_monster.getAsInteger("atk")+"<br></font>"
+                    +"<font color=${Color.RED}>防禦力:</font>"
+                    +"<font color=${Color.WHITE}>"+obj_monster.getAsInteger("def")+"<br></font>"
+                    +"<font color=${Color.RED}>速度:</font>"
+                    +"<font color=${Color.WHITE}>"+obj_monster.getAsInteger("speed")+"<br></font>"
+                    +"<font color=${Color.RED}>掉落exp:</font>"
+                    +"<font color=${Color.WHITE}>"+obj_monster.getAsInteger("exp")+"<br></font>"
+                    +"<font color=${Color.RED}>掉落金錢:</font>"
+                    +"<font color=${Color.WHITE}>"+obj_monster.getAsInteger("money")+"<br></font>"
+            ,Html.FROM_HTML_MODE_LEGACY)
+
+
+    }
+    private fun monster_level_select():Int{
+        //怪物等級
+        return (Math.pow(3.5,(public_var_dungeon_place.toDouble()-1.0))*(public_var_dungeon_place)+((public_var_dungeon_level/5).toInt()*2.0)).toInt()
     }
     fun Is_Die(){
         val button_battle:Button=findViewById<Button>(R.id.button_battle)
@@ -205,12 +281,18 @@ class MainActivity : AppCompatActivity() {
 
         var obj_monster :ContentValues = Cursor_To_ContentValues(cursor)
 
+        ////
+        //怪物等級
+        var var_monster_level=monster_level_select()
+
+        obj_monster=monster_level_count(obj_monster,var_monster_level)
+        monster_status_change(obj_monster,var_monster_level)
+        ////
         var db_table="monster LEFT JOIN useskill ON monster.name = useskill.user_name LEFT JOIN skills ON useskill.skill_name = skills.skill_name"
         var db_columns= arrayOf("skills.skill_name","skills.skill_damage_multiplier")
 
         val skill_cursor = MyDB.query(db_table,db_columns ,selection, selectionArgs, null, null, null)
 //        var obj_skill_list:ContentValues=Cursor_To_ContentValues(skill_cursor)
-
         var obj_skill_list=Cursor_to_HashMap(skill_cursor)
         obj_skill_list.put("攻擊",1.3)
 //        val monsterName =obj_monster.get("name")
@@ -224,7 +306,7 @@ class MainActivity : AppCompatActivity() {
         var var_battle_round:Int=0
         var var_monster_weaken:Double=1.0//怪獸傷害削弱
 
-        while (obj_player.getAsInteger("hp")>0&&obj_monster.getAsInteger("hp")>0){
+            while (obj_player.getAsInteger("hp")>0&&obj_monster.getAsInteger("hp")>0){
             var_battle_round+=1
             var_totalweight=obj_player.getAsInteger("stamina")+obj_monster.getAsInteger("stamina")
 
@@ -396,10 +478,10 @@ class MainActivity : AppCompatActivity() {
         var var_heal_hp:Int
         var var_heal_stamina_add:Int
         var var_heal_stamina:Int
-        var var_rest_need_money=1//休息消耗金幣 改比率
+        var var_rest_need_money=0//休息消耗金幣 改比率
         if(obj_player.getAsInteger("money")>=var_rest_need_money){
-            var_heal_hp_add=((obj_player.getAsInteger("maxhp")-obj_player.getAsInteger("hp"))*0.4).toInt()
-            var_heal_stamina_add=((obj_player.getAsInteger("maxstamina")-obj_player.getAsInteger("stamina"))*0.4).toInt()
+            var_heal_hp_add=((obj_player.getAsInteger("maxhp")-obj_player.getAsInteger("hp"))*0.4+1).toInt()
+            var_heal_stamina_add=((obj_player.getAsInteger("maxstamina")-obj_player.getAsInteger("stamina"))*0.4+1).toInt()
             if(obj_player.getAsInteger("hp")+var_heal_hp_add<=obj_player.getAsInteger("maxhp")){
                 var_heal_hp=obj_player.getAsInteger("hp")+var_heal_hp_add
             }
