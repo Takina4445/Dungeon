@@ -159,7 +159,7 @@ class MyDBHelper(context: Context?, name: String?, factory: SQLiteDatabase.Curso
             newRow.put("picture","wildboar")
             newRow.put("exp", 3)
             newRow.put("level",1)
-            newRow.put("hp", 10)
+            newRow.put("hp", 20)
             newRow.put("maxhp", 20)
             newRow.put("stamina", 15)
             newRow.put("maxstamina",15)

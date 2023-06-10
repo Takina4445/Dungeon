@@ -177,9 +177,9 @@ var i:Int=0
         var var_battle_random:Int
         var var_use_stamina:Int//體力消耗
         var var_battle_reward:String=""//戰鬥獎勵
-
+        var var_battle_round:Int=0
         while (obj_player.getAsInteger("hp")>0&&obj_monster.getAsInteger("hp")>0){
-
+            var_battle_round+=1
             var_totalweight=obj_player.getAsInteger("stamina")+obj_monster.getAsInteger("stamina")
 
 
@@ -195,7 +195,8 @@ var i:Int=0
                     var_battle_damage=1
                 }
                 battle_log.append(Html.fromHtml(
-                        "<font color=${Color.CYAN}>" + obj_player.get("name") + "&nbsp;</font>"
+                    "<font color=${Color.WHITE}>"+var_battle_round+".&nbsp;</font>"
+                                +"<font color=${Color.CYAN}>" + obj_player.get("name") + "&nbsp;</font>"
                                 + "<font color=${Color.WHITE}>對&nbsp;</font>"
                                 + "<font color=${Color.RED}>" + obj_monster.get("name") + "&nbsp;</font>"
                                 + "<font color=${Color.WHITE}>使出&nbsp;</font>" + "<font color=${Color.YELLOW}>" + "攻擊" + "&nbsp;</font>"
@@ -231,8 +232,8 @@ var i:Int=0
 
             else {
                 //怪物回合
-                battle_log.append(Html.fromHtml(
-                    "<font color=${Color.RED}>" + obj_monster.get("name") + "&nbsp;</font>"
+                battle_log.append(Html.fromHtml("<font color=${Color.WHITE}>"+var_battle_round+".&nbsp;</font>"
+                            +"<font color=${Color.RED}>" + obj_monster.get("name") + "&nbsp;</font>"
                             + "<font color=${Color.WHITE}>對&nbsp;</font>"
                             + "<font color=${Color.CYAN}>" + obj_player.get("name") + "&nbsp;</font>"
                             + "<font color=${Color.WHITE}>使出&nbsp;</font>" + "<font color=${Color.YELLOW}>" + "攻擊" + "&nbsp;</font>"
