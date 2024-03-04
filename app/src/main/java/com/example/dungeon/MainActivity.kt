@@ -21,6 +21,7 @@ import android.text.Html
 //import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 //import android.widget.Toast
 //import com.example.dungeon.MyDBHelper.Companion.DB_TABLE_MONSTER
@@ -40,6 +41,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var button_place_1:Button
     private lateinit var button_place_2:Button
     private lateinit var button_place_3:Button
+    private lateinit var button_next_level:Button
+    lateinit var imageview_EnemyPic:ImageView
     val DB_FILE = "doungeon.db"
     val DB_TABLE = "player"
     val DB_TABLE_MONSTER = "monster"
@@ -48,6 +51,7 @@ class MainActivity : AppCompatActivity() {
     val DB_TABLE_ITEM="item"
     var public_var_dungeon_place:Int=1
     var public_var_dungeon_level:Int=1
+    var public_var_has_won:Boolean=false//是否戰鬥勝利過
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,6 +68,11 @@ class MainActivity : AppCompatActivity() {
         val button_place_1:Button=findViewById<Button>(R.id.button_place1)
         val button_place_2:Button=findViewById<Button>(R.id.button_place2)
         val button_place_3:Button=findViewById<Button>(R.id.button_place3)
+        val button_next_level:Button=findViewById<Button>(R.id.button_next_level)
+        imageview_EnemyPic=findViewById<ImageView>(R.id.imageview_EnemyPic)
+        Image_Place_Change()
+        Text_Place_Change()
+        ///
         button_main.setOnClickListener(ActivityChange_main)
         button_item.setOnClickListener(ActivityChange_item)
         button_food.setOnClickListener(ActivityChange_food)
@@ -72,27 +81,88 @@ class MainActivity : AppCompatActivity() {
         button_place_1.setOnClickListener(ActivityChange_Place_1)
         button_place_2.setOnClickListener(ActivityChange_Place_2)
         button_place_3.setOnClickListener(ActivityChange_Place_3)
+        button_next_level.setOnClickListener(ActivityChange_next_level)
         player_status_change()//刷新玩家資料
         val battle_log:TextView=findViewById<TextView>(R.id.textview_battleprocess)//戰鬥紀錄
         battle_log.text= ""
+        public_var_dungeon_place=1
+        public_var_dungeon_level=1
+        public_var_has_won=false//是否戰鬥勝利過
 
     }
     ////////////////////
+    private fun Image_Place_Change(){
+        when(public_var_dungeon_place){
+            1->{
+                imageview_EnemyPic.setImageResource(R.drawable.place_1)
+            }
+            2->{
+                imageview_EnemyPic.setImageResource(R.drawable.place_2)
+            }
+            3->{
+                imageview_EnemyPic.setImageResource(R.drawable.place_3)
+            }
+        }
+    }
     private val ActivityChange_Place_1= View.OnClickListener{
         //切換至主place1
         public_var_dungeon_place=1
         public_var_dungeon_level=1
-
+        public_var_has_won=false
+        Image_Place_Change()
+        Text_Place_Change()
     }
+
     private val ActivityChange_Place_2= View.OnClickListener{
         //切換至主place1
         public_var_dungeon_place=2
         public_var_dungeon_level=1
+        public_var_has_won=false
+        Image_Place_Change()
+        Text_Place_Change()
     }
     private val ActivityChange_Place_3= View.OnClickListener{
         //切換至主place1
         public_var_dungeon_place=3
         public_var_dungeon_level=1
+        public_var_has_won=false
+        Image_Place_Change()
+        Text_Place_Change()
+
+    }
+    private val ActivityChange_next_level=View.OnClickListener {
+        if (public_var_has_won==true){
+            public_var_dungeon_level+=1
+            public_var_has_won=false
+            Text_Place_Change()
+            Image_Place_Change()
+        }
+        else{
+            AlertDialog.Builder(this)  //參數放要傳入的 MainActivity Context
+                .setMessage("打贏當前層數才能去下一關")
+                .setPositiveButton("確認",null)
+                .create()
+                .show()
+        }
+    }
+    private fun Text_Place_Change(){
+        var place_status=findViewById<TextView>(R.id.textview_EnemyStatus)
+        var place_name:String=""
+        when(public_var_dungeon_place){
+            1->{
+                place_name="巴別塔"
+            }
+            2->{
+                place_name="精靈樹"
+            }
+            3->{
+                place_name="龍之巢穴"
+            }
+        }
+        place_status.text=Html.fromHtml(
+            "<font color=${Color.CYAN}>"+place_name+"&nbsp;</font>"
+                    +"<font color=${Color.CYAN}>第"+public_var_dungeon_level+"層</font>"
+            ,Html.FROM_HTML_MODE_LEGACY)
     }
 
     ////////////////////
@@ -220,7 +290,60 @@ class MainActivity : AppCompatActivity() {
     }
     private fun monster_level_select():Int{
         //怪物等級
-        return (Math.pow(3.5,(public_var_dungeon_place.toDouble()-1.0))*(public_var_dungeon_place)+((public_var_dungeon_level/5).toInt()*2.0)).toInt()
+        return (Math.pow(3.5,(public_var_dungeon_place.toDouble()-1.0))*(public_var_dungeon_place)+((public_var_dungeon_level/3 ).toInt()*2.0)).toInt()
+    }
+
+    fun Check_Player_Level_Up(obj_player:ContentValues):ContentValues{
+        var exp:Int
+        var level:Int
+        var level_up_need_exp:Double
+        var obj_player_new:ContentValues
+        obj_player_new=obj_player
+        do{
+
+            exp=obj_player_new.getAsInteger("exp")
+            level=obj_player_new.getAsInteger("level")
+            level_up_need_exp=(20*Math.pow(1.2,(level-1.0)))
+            if(exp>=level_up_need_exp){
+
+                obj_player_new.put("level",obj_player_new.getAsInteger("level")+1)
+                obj_player_new.put("exp",obj_player_new.getAsInteger("exp")-level_up_need_exp)
+                obj_player_new=Player_Level_Up(obj_player_new,level+1)
+            }
+        }while(exp>=level_up_need_exp)
+        return  obj_player_new
+
+    }
+    fun Player_Level_Up(obj_player: ContentValues,level: Int):ContentValues{
+        var var_level_cursor:ContentValues=obj_player
+        var level:Double=level.toDouble()
+        var maxhp=player_level_count_put("maxhp",var_level_cursor,level)
+        var maxstamina=player_level_count_put("maxstamina",var_level_cursor,level)
+        /*
+        //數值崩壞
+        var_level_cursor.put("maxhp",maxhp)
+        var_level_cursor.put("hp",maxhp)//血量同時恢復到最大值
+        var_level_cursor.put("maxstamina",maxstamina)
+        var_level_cursor.put("stamina",maxstamina)//體力同時恢復到最大值
+        var_level_cursor.put("atk",player_level_count_put("atk",var_level_cursor,level))
+        var_level_cursor.put("def",player_level_count_put("def",var_level_cursor,level))
+        var_level_cursor.put("speed",player_level_count_put("speed",var_level_cursor,level))
+        */
+        var_level_cursor.put("maxhp",var_level_cursor.getAsInteger("maxhp")+5)
+        var_level_cursor.put("hp",var_level_cursor.getAsInteger("maxhp"))//血量同時恢復到最大值
+        var_level_cursor.put("maxstamina",var_level_cursor.getAsInteger("maxstamina")+5)
+        var_level_cursor.put("stamina",var_level_cursor.getAsInteger("maxstamina"))//體力同時恢復到最大值
+        var_level_cursor.put("atk",var_level_cursor.getAsInteger("atk")+2)
+        var_level_cursor.put("def",var_level_cursor.getAsInteger("def")+1)
+        var_level_cursor.put("speed",var_level_cursor.getAsInteger("speed")+2)
+        return var_level_cursor
+    }
+
+    ///////////////////
+
+    private fun player_level_count_put(key: String, cursor: ContentValues, level: Double): Int{
+        var var_pow_per_level:Double=1.1
+        return ((cursor.getAsInteger(key)+1)*Math.pow(var_pow_per_level, (level-1.0)) + level-2).toInt()
     }
     fun Is_Die(){
         val button_battle:Button=findViewById<Button>(R.id.button_battle)
@@ -278,9 +401,10 @@ class MainActivity : AppCompatActivity() {
 //        arrayOf(columnName)
 
         cursor.moveToFirst()
-
+//        val imageview_EnemyPic:ImageView=findViewById<ImageView>(R.id.imageview_EnemyPic)
         var obj_monster :ContentValues = Cursor_To_ContentValues(cursor)
-
+        val resourceId = resources.getIdentifier(obj_monster.getAsString("picture"), "drawable", packageName)
+        imageview_EnemyPic.setImageResource(resourceId)
         ////
         //怪物等級
         var var_monster_level=monster_level_select()
@@ -411,6 +535,8 @@ class MainActivity : AppCompatActivity() {
                         , Html.FROM_HTML_MODE_LEGACY
                     )
                 )
+                obj_player=Check_Player_Level_Up(obj_player)
+                public_var_has_won=true//勝利過了
             } else {
                 battle_log.append(
                     Html.fromHtml(
@@ -421,9 +547,15 @@ class MainActivity : AppCompatActivity() {
                 Is_Die()
             }
             val newRow = ContentValues()
-            newRow.put("hp", obj_player.getAsInteger("hp"))
-            newRow.put("stamina", obj_player.getAsInteger("stamina"))
             newRow.put("exp", obj_player.getAsInteger("exp"))
+            newRow.put("level", obj_player.getAsInteger("level"))
+            newRow.put("hp", obj_player.getAsInteger("hp"))
+            newRow.put("maxhp", obj_player.getAsInteger("maxhp"))
+            newRow.put("stamina", obj_player.getAsInteger("stamina"))
+            newRow.put("maxstamina", obj_player.getAsInteger("maxstamina"))
+            newRow.put("atk", obj_player.getAsInteger("atk"))
+            newRow.put("def", obj_player.getAsInteger("def"))
+            newRow.put("speed", obj_player.getAsInteger("speed"))
             newRow.put("money", obj_player.getAsInteger("money"))
             MyDB.update(DB_TABLE, newRow, "id='1'", null)
             player_status_change()
